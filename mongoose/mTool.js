@@ -15,7 +15,7 @@
 
 
 var mTool = {
-	insert:function(obj,schema,callback,error){
+	insert:function(obj,schema,callback){
 		var o = new obj(schema);
 		o.save(function(err,res){
 			callback&&callback(err,res);

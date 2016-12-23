@@ -1,0 +1,28 @@
+{
+  "name": "node-mongoose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.4",
+    "supervisor": "^0.12.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sun4343lee/railwaySystem.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sun4343lee/railwaySystem/issues"
+  },
+  "homepage": "https://github.com/sun4343lee/railwaySystem#readme"
+}

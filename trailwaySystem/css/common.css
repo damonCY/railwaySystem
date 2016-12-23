@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+.login {
+  background: url(../img/login1.jpg) no-repeat;
+  background-size: cover;
+}
+.login .login-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login .login-content .tip {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 10px;
+  color: #2aad5f;
+}
+.login .login-content .tip a {
+  color: #2aad5f;
+}
+.login .content {
+  width: 65%;
+}
+.login .input-content {
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.login .input-content input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  margin: 0;
+}
+.login .input-content .button {
+  background: #2aad5f ;
+  color: #fff;
+  border-radius: 10px;
+}
