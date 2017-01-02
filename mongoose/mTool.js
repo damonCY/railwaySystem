@@ -16,6 +16,7 @@
 
 var mTool = {
 	insert:function(obj,schema,callback){
+		console.log("tool "+JSON.stringify(schema))
 		var o = new obj(schema);
 		o.save(function(err,res){
 			callback&&callback(err,res);
@@ -35,9 +36,9 @@ var mTool = {
 		})
 	},
 	update: function(obj,id,new_schema,callback){
-		var id = id || "";
 		var news = new_schema || {};
-		obj.findByIdAndUpdate(id,news,function(err,resdata){
+		console.log("news "+JSON.stringify(news))
+		obj.update({_id: id},news,function(err,resdata){
 			callback&&callback(err,resdata);
 		})
 

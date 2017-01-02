@@ -1,23 +1,26 @@
 $(function(){
+	tool.removeItem('user');
 	function getForm(){
-		var name = $('#name').val();
+		var phone = $('#phone').val();
 		var userType = $('#usertype').val();
 		var pwd = $('#pwd').val();
-		if(name&&userType&&pwd){}else{mui.toast("请填写完整");return};
-		var schema = "http://127.0.0.1:3000"
+		if(phone&&pwd){}else{mui.toast("请填写完整");return};
 		$.ajax({
-			url: schema+"/register",
+			url: tool.schema+"/register",
 			type: "POST",
 			data:{
-				"name": name,
-				"password": pwd,
-				"userType": userType
+				"phone": phone,
+				"password": pwd
 			},
 			success: function(data){
+				mui.toast(data)
 				if(data.status==0){
 					mui.toast("此账号已被注册，请选择其他账号");return;
 				}else{
 					mui.toast("注册成功");
+					tool.setItem("user",{"phone":phone,id:data._id});
+					tool.open({"url":"./index.html","data":phone});
+
 				}
 			},
 			error: function(err){
@@ -26,7 +29,12 @@ $(function(){
 		})
 		
 	}
+	var cleantime;
 	$('.button').on('click',function(){
-		getForm()
+		clearTimeout(cleantime);
+		var cleantime = setTimeout(function(){
+			getForm();
+		},500)
+		
 	})
 })

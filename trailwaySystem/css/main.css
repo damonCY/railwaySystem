@@ -1,0 +1,87 @@
+.border-bottom {
+  border-bottom: 1px solid #999;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  .border-bottom {
+    border-bottom: 0.5px solid #999;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 3) {
+  .border-bottom {
+    border: 0.333333px solid #999;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left {
+  background: #fff;
+  width: 70%;
+  color: #fff;
+  font-size: 16px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .mui-table-view {
+  background-color: transparent;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu i {
+  margin-right: 5px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type {
+  padding: 10px 10px 10px 20px;
+  color: #8f8f94;
+  overflow: hidden;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .photo {
+  float: left;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .photo img {
+  width: 60px;
+  height: 60px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .tip-content {
+  margin-left: 80px;
+  height: 60px;
+  line-break: 60px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .tip-content p {
+  margin: 0;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .tip-content .name {
+  font-size: 20px;
+  line-height: 45px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .tip-content .role-type {
+  font-size: 13px;
+  line-height: 10px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content a {
+  color: #8f8f94;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content .exit {
+  background: orange;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content .active {
+  background: #333;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content li {
+  margin: 0;
+  padding: 10px 0px 10px 20px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content li ul {
+  list-style: none;
+  font-size: 13px;
+}
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content li ul li {
+  padding-left: 20px;
+  padding: 10px 0px 10px 20px;
+}
