@@ -11,7 +11,6 @@ tool.ready(function(){
 	function getForm(){
 		var phone = $('#phone').val();
 		var pwd = $('#pwd').val();
-		console.log(name,pwd)
 		if(phone&&pwd){}else{mui.toast("请填写完整");return};
 		$.ajax({
 			url: tool.schema+"/login",

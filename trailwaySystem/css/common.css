@@ -9,9 +9,11 @@ body {
   height: 100%;
   background: #fff;
 }
-.login {
-  background: url(../img/login1.jpg) no-repeat;
-  background-size: cover;
+body {
+  background: url(../img/bg.png);
+  animation: mymove 45s linear infinite;
+  background-position: 0px 0px;
+  background-repeat: repeat-x;
 }
 .login .login-content {
   position: relative;
@@ -51,4 +53,21 @@ body {
   background: #2aad5f ;
   color: #fff;
   border-radius: 10px;
+}
+@keyframes mymove {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: -2560px 0;
+  }
+}
+@-webkit-keyframes mymove {
+  /*Safari and Chrome*/
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: -2560px 0;
+  }
 }

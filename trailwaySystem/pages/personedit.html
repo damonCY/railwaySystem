@@ -13,7 +13,7 @@
 		<header class="mui-bar mui-bar-nav header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">请编辑</h1>
-			<a href="#" class=" mui-pull-right save">保存</a>
+			<button type="button" class="mui-pull-right mui-btn mui-btn-success save">保存</button>
 		</header>
 		<div class="mui-content">
 			<div class="edit input-content">
@@ -24,30 +24,25 @@
 		</div>
 	</body>
 <script src="../js/mui.min.js"></script>
-<script type="text/javascript">
-	mui.init({
-		beforeback: function(){
-			//获得personal界面的webview
-			var list = plus.webview.getWebviewById('../pages/personal.html');
-			//触发界面的自定义事件（refresh）,从而进行数据刷新
-			mui.fire(list,'refresh');
-			//返回true，继续页面关闭逻辑
-			return true;
-		}
-	})
-</script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/tool.js"></script>
+<script type="text/javascript">
+	mui.init({
+//		beforeback: function(){
+//			//获得personal界面的webview
+//			var list = plus.webview.getWebviewById('../pages/personal.html');
+//			//触发界面的自定义事件（refresh）,从而进行数据刷新
+//			mui.fire(list,'refresh');
+//			//返回true，继续页面关闭逻辑
+//			return true;
+//		}
+	})
+</script>
 <script>
 	tool.ready(function(){
-		init();
-		var data;
-		function init(){
-			data = plus.webview.currentWebview()['data'];
-//			console.log("now "+JSON.stringify(data))
-			$('.mui-title').text(data.title);
-			$('#input').val(data.inputValue);
-		}
+		var data = tool.getItem('extras');
+		$('.mui-title').text(data.title);
+		$('#input').val(data.inputValue);
 		$('.save').on('tap',function(){
 			var value = $('#input').val();
 			if(value){
@@ -57,7 +52,7 @@
 					parent.reload(true);
 					mui.back();
 			}else{
-				mui.toast("请输入"+data.data.title);
+				mui.toast("请输入"+data.title);
 			}
 		})
 	})

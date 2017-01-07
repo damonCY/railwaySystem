@@ -22,6 +22,7 @@ var tool = {
 	},
 	getItem: function(name,key){
 		var local = localStorage.getItem(name)||"";
+		var value = {};
 		if(!local){
 			return {};
 		}
@@ -41,7 +42,7 @@ var tool = {
 		return localStorage.clear();
 	},
 	open: function(params){
-		return mui.openWindow({url: params.url,"id":params.url,extras:{"data": params.data||""},
+		return mui.openWindow({"url": params.url,"id":params.url,"extras": params.data,
 //			show:{
 //		      autoShow:true,//页面loaded事件发生后自动显示，默认为true
 //		      aniShow:animationType,//页面显示动画，默认为”slide-in-right“；
@@ -49,5 +50,5 @@ var tool = {
 //		    },
 		});
 	},
-	schema:  "http://sun4343lee.imwork.net",
+	schema: "http://sun4343lee.imwork.net",
 }

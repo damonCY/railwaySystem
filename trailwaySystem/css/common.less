@@ -8,9 +8,13 @@ html,body{
     height: 100%;
     background: #fff;
 }
+    body{
+        background: url(../img/bg.png);
+        animation: mymove 45s linear infinite;
+        background-position: 0px 0px;
+        background-repeat: repeat-x;
+    }
 .login{
-    background: url(../img/login1.jpg)no-repeat;
-    background-size: cover;
     .login-content{
         position: relative;
         height: 100%;
@@ -29,14 +33,7 @@ html,body{
         }
     }
     .content{
-//      position: absolute;
-//      top: 50%;
-//      left: 50%;
-        width: 65%;
-//      -ms-transform: translate(-50%,-50%);
-//      -moz-transform: translate(-50%,-50%);
-//      -o-transform: translate(-50%,-50%);
-//      transform: translate(-50%,-50%); 
+        width: 65%; 
     }
     .input-content{
         height: 40px;
@@ -57,4 +54,15 @@ html,body{
             border-radius: 10px;
         }
     }
+}
+@keyframes mymove
+{
+0% {background-position:0px 0px;}
+100% {background-position:-2560px 0}
+}
+
+@-webkit-keyframes mymove /*Safari and Chrome*/
+{
+0% {background-position:0px 0px;}
+100% {background-position:-2560px 0}
 }

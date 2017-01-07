@@ -27,7 +27,7 @@ module.exports = function(app){
 
 		var phone = req.body.phone;
 		var password = req.body.password;
-		console.log("pass "+password)
+		console.log("pass "+password);
 		mTool.find(schemas.personal,{"phone": phone},function(err,data){
 			console.log("find "+data)
 			if(data.length>0){
@@ -37,7 +37,8 @@ module.exports = function(app){
 			console.log("pass2 "+password)
 			mTool.insert(schemas.personal,{
 			    "phone": phone,                 
-			    "password": password
+			    "password": password,
+			    "id": Date.parse(new Date()),
 			},function(err,data){
 				if(err){
 					res.send(err)
@@ -80,8 +81,12 @@ module.exports = function(app){
 		}
 		console.log("obj "+JSON.stringify(obj));
 		mTool.update(schemas.personal,{"_id": id},{$set: obj},function(err,data){
-			console.log('updata '+JSON.stringify(data));
-			res.send(data);
+			if(err){
+				console.log("something wrong"+err);
+			}else{
+				console.log('updata '+JSON.stringify(data));
+				res.send(data);
+			}
 		})
 	})
 

@@ -21,12 +21,13 @@ tool.ready(function(){
 		pickDate();
 	})
 	$('.name').on('tap',function(){
-		var value = $(this).find("#name").text();
+		var value = $(this).find("#name").text()|| "";
 		var data = {
-			title: '修改呢称',
-			inputValue: value,
-			type: "name"
+			"title": '修改呢称',
+			"inputValue": value ,
+			"type": "name"
 		}
+		tool.setItem("extras",data);
 		tool.open({"url":"../pages/personedit.html","data":data});
 	})
 	$('.userType').on('tap',function(){
