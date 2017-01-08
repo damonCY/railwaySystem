@@ -13,19 +13,19 @@
 	<body>
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init();
 		</script>
 		<!-- 侧滑导航根容器 -->
 		<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
 		  <!-- 菜单容器 -->
 		  <aside class="mui-off-canvas-left">
 		    <div class="mui-scroll-wrapper">
-		      <div class="mui-scroll">
+		      <div class="mui-scroll" style="z-index: 1000;">
 		        <!-- 菜单具体展示内容 -->
 		        <nav class="menu">
 		        	<nav class="user-type">
 		        		<div class="photo">
-		        			<img src="../img/logo.png" alt="" />
+		        			<img src="../img/logo.png" alt="" class="photo"/>
 		        		</div>
 		        		<div class="tip-content">
 		        			<p class="name">sun4343lee</p>
@@ -45,7 +45,7 @@
 		        		<li class="item-one">
 		        			<a href="#"><i class="fa fa-train"></i>应急处置</a>
 		        			<ul class="item-two">
-		        				<li><a href="">车辆故障</a></li>
+		        				<li class="emergency"><a href="">车辆故障</a></li>
 		        				<li><a href="">大客流处置</a></li>
 		        				<li><a href="">火灾处置</a></li>
 		        				<li><a href="">其他</a></li>
@@ -69,26 +69,55 @@
 		  <div class="mui-inner-wrap">
 		    <!-- 主页面标题 -->
 		    <header class="mui-bar mui-bar-nav">
-		      <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
-		      <h1 class="mui-title">标题</h1>
+			    <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+			    <h1 class="mui-title">列车处置列表</h1>
+			    <div class="refresh" id="update">
+			    	<i class="fa fa-refresh fa-spin mui-pull-right" id="refresh"></i>
+			    </div>
 		    </header>
 		    <div class="mui-content mui-scroll-wrapper">
 		      <div class="mui-scroll">
 		        <!-- 主界面具体展示内容 -->
-		        <ul>
-		        	<li>11</li>
-		        	<li>11</li>
-		        	<li>11</li>
-		        	<li>11</li>
-		        	<li>11</li>
-		        </ul>
+		      	<div class="list-content">
+		      		<ul class="mui-table-view" id="template">
+		      			<!--<li class="mui-table-view-cell">
+		      				<div class="position mui-pull-left">
+		      					position
+		      				</div>
+		      				<div class="item mui-pull-right">
+		      					item
+		      				</div>
+		      				<div class="reason">
+		      					reason
+		      				</div>
+		      				
+		      			</li>-->
+		      		</ul>
+		      	</div>
+
 		      </div>
 		    </div>  
 		  </div>
 		</div>
-	</body>
+		<script id="templateModel" type="text/html">
+			{{each data as item}}
+			<li class="mui-table-view-cell">
+				<div class="position mui-pull-left">
+					{{item.positions}}
+				</div>
+				<div class="item mui-pull-right">
+					{{item.time}}
+				</div>
+				<div class="reason">
+					{{item.reason}}
+				</div>
+			</li>
+			{{/each}}
+		</script>
 <script type="text/javascript" src="../js/mui.js"></script>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/template.js"></script>
 <script type="text/javascript" src="../js/tool.js"></script>
+</body>
 <script type="text/javascript" src="../js/main.js"></script>
 </html>

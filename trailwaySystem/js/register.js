@@ -1,8 +1,9 @@
 tool.ready(function(){
 	function getForm(){
-		var name = $('#phone').val();
+		var phone = $('#phone').val();
 		var pwd = $('#pwd').val();
-		if(name&&pwd){}else{mui.toast("请填写完整");return};
+		
+		if(phone&&pwd){}else{mui.toast("请填写完整");return};
 		$.ajax({
 			url: tool.schema+"/register",
 			type: "POST",
@@ -14,7 +15,8 @@ tool.ready(function(){
 				if(data.status==0){
 					mui.toast("此账号已被注册，请选择其他账号");return;
 				}else{
-					tool.open({"url": "login.html","data":{"phone": name}})
+					tool.getItem("user",{"phone": phone});
+					tool.open({"url": "./index.html","data":{"phone": name}})
 					mui.toast("注册成功");
 				}
 			},

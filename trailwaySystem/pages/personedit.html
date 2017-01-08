@@ -28,14 +28,7 @@
 <script src="../js/tool.js"></script>
 <script type="text/javascript">
 	mui.init({
-//		beforeback: function(){
-//			//获得personal界面的webview
-//			var list = plus.webview.getWebviewById('../pages/personal.html');
-//			//触发界面的自定义事件（refresh）,从而进行数据刷新
-//			mui.fire(list,'refresh');
-//			//返回true，继续页面关闭逻辑
-//			return true;
-//		}
+		swipeBack:true //启用右滑关闭功能,
 	})
 </script>
 <script>
@@ -48,9 +41,8 @@
 			if(value){
 				var type = data.type || "";
 				tool.setItem("user",{"name": value});
-				var parent = plus.webview.getWebviewById("../pages/personal.html");
-					parent.reload(true);
-					mui.back();
+				tool.reload("../pages/personal.html");
+				mui.back();
 			}else{
 				mui.toast("请输入"+data.title);
 			}

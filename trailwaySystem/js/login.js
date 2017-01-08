@@ -1,7 +1,6 @@
 tool.ready(function(){
 
 	var phone = tool.getItem("user","phone");
-	console.log("this "+phone);
 	if(Number(phone)){
 		$('#phone').val(phone);
 	}else{
@@ -21,8 +20,6 @@ tool.ready(function(){
 			},
 			success: function(data){
 				mui.toast(data);
-				var item = tool.getItem("user");
-				console.log('BACK '+JSON.stringify(item));
 				if(data.status==0){
 					mui.toast(data.data);
 					return;

@@ -12,6 +12,9 @@ body {
   color: #8f8f94;
   background: #f8f8f8;
 }
+body input {
+  margin: 0;
+}
 body .mui-content {
   background: #f8f8f8;
 }

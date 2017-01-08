@@ -38,13 +38,12 @@ module.exports = function(app){
 			mTool.insert(schemas.personal,{
 			    "phone": phone,                 
 			    "password": password,
-			    "id": Date.parse(new Date()),
+			    "id": (new Date()).valueOf(),
 			},function(err,data){
 				if(err){
 					res.send(err)
 				}else{
 					console.log("databack "+ data);
-					console.log(data.phone,data.password,data._id);
 					res.send({"status": "1","data": data});
 				}
 			});
@@ -80,11 +79,64 @@ module.exports = function(app){
 			obj[key] = req.body[key];
 		}
 		console.log("obj "+JSON.stringify(obj));
-		mTool.update(schemas.personal,{"_id": id},{$set: obj},function(err,data){
+
+		mTool.update(schemas.personal,{"id": id},{$set: obj},function(err,data){
 			if(err){
 				console.log("something wrong"+err);
 			}else{
 				console.log('updata '+JSON.stringify(data));
+				res.send(data);
+			}
+		})
+	});
+	app.post('/notice/upload',function(req,res){
+		var obj = {};
+		var id = req.body.id;
+		var etag = req.body.etag;
+		for(var key in req.body){
+			obj[key] = req.body[key];
+		}
+		console.log("getBody "+JSON.stringify(obj));
+		mTool.find(schemas.noticeList,{"id": id},function(err,data){//查询存在
+			var data = data[0];
+			console.log("dataetag ",etag == data.etag);
+			if(!data || etag!=data.etag){
+				
+				mTool.insert(schemas.noticeList,obj, //不存在就添加
+					function(err,data){
+					if(err){
+						res.send(err)
+					}else{
+						res.send({"status": 1,"data": data});
+					}
+				});
+			}else{
+				console.log("db obj "+JSON.stringify(obj))
+				mTool.update(schemas.noticeList,{"id": id},{$set: obj},function(err,data){ //存在就更新
+					if(err){
+						res.send("error: "+err)
+					}else{
+						res.send({"status": "1","data": data});
+					}
+				});
+			}
+			
+		})
+		
+	})
+	//创建etag标志
+	app.get('/getEtag',function(req,res){
+		var etag = (new Date()).valueOf();
+		console.log("sendetag "+etag);
+		res.send({"status": "1","data": {"etag": etag}});
+	});
+
+	//mainPage列表
+	app.get("/noticeList",function(req,res){
+		mTool.find(schemas.noticeList,{},function(err,data){
+			if(err){
+				console.log("/noticeList error"+ err)
+			}else{
 				res.send(data);
 			}
 		})

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<style>
+			.content .label{
+				float: left;
+				width: 90px;
+				line-height: 45px;
+			}
+			.content .input-content{
+				margin-left: 90px;
+			}
+			.content .input-content input{
+				margin-bottom: 0px;
+			}
+			.content .textareaLabel{
+				line-height: 60px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">接警</h1>
+			<a href="#" class=" mui-pull-right save">上报</a>
+		</header>
+		<div class="mui-content content ">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-celll">
+					<div class="label">位置</div>
+					<div class="input-content">
+						<input type="text" value="岗厦上行线" readonly="readonly" id="positions"/>
+					</div>
+				</li>
+				<li class="mui-table-view-celll">
+					<div class="label">车次</div>
+					<div class="input-content">
+						<input type="text" value="车次号" readonly="readonly" id="train"/>
+					</div>
+				</li>
+				<li class="mui-table-view-celll">
+					<div class="label textareaLabel">故障原因</div>
+					<div class="input-content">
+						<!--<input type="text" value=" 故障原因" readonly="readonly" id="reason"/>-->
+						<textarea  value="故障原因" readonly="readonly" id="reason"rows="" cols="">故障原因</textarea>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/tool.js"></script>
+<script src="../js/emergency.js"></script>
+</html>

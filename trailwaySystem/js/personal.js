@@ -1,11 +1,20 @@
 tool.ready(function(){
+	mui.init({
+		swipeBack:true //启用右滑关闭功能, 
+	});
+	
 	init(); //初始化显示
+	tool.plusReady(function(){
+		var pages = plus.webview.all();
+		pages.forEach(function(value,index){
+			console.log(JSON.stringify(value))
+		})
+	})
 	$('.submit').on('tap',function(){
 //		mui.prompt('你确定退出登录吗？',['true','false'],null,'div');
 		mui.confirm("",'你确定退出登录吗?',['确定','再看看'],function(data){
 			var index = data.index;
 			if(index === 0){
-				tool.removeItem('user');
 				var pages = plus.webview.all();
 				for (var i = 0, len = pages.length; i < len; i++) {
 					plus.webview.close(pages[i]);
@@ -37,6 +46,9 @@ tool.ready(function(){
 	$('.save').on('tap',function(){
 		save();
 	})
+	$('.my-photo').on('tap',function(){
+		gallery();
+	})
 function init(){
 	var user = tool.getItem('user');
 	console.log("this  "+JSON.stringify(user));
@@ -45,6 +57,13 @@ function init(){
 	$("#birthday").text(user["birthday"]);
 	$("#userType").text(user["userType"]);
 	$("#phone").text(user["phone"]);
+	console.log(user["photo"]);
+	if(user["photo"]){
+		$('#photo').attr('src',user['photo']);
+	}else{
+		$('#photo').attr('src',"../img/logo.png");
+	}
+	
 	
 }
 function showActionSheet(){
@@ -68,8 +87,7 @@ function save(){
 		type: "POST",
 		data: obj,
 		success: function(data){
-			console.log("DATA "+ JSON.stringify(data));
-			if(data.ok == 0){
+			if(data.ok == 1){
 				mui.toast('save success');
 			}
 		},
@@ -112,4 +130,15 @@ function pickDate() {
 		console.log( "未选择日期："+e.message );
 	});
 }
+
+function gallery(){
+	plus.gallery.pick( function(path){
+	    	console.log("22"+path);
+	    	tool.setItem('user',{"photo": path});
+	    	$('.my-photo img').attr('src',path);
+	    	tool.reload();
+	    }, function ( e ) {
+	    	console.log( "取消选择图片" );
+	    }, {filter:"image"} );
+	}
 })

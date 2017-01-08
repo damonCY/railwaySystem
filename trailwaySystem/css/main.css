@@ -71,7 +71,7 @@
   background: orange;
 }
 .mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content .active {
-  background: #333;
+  background: rgba(216, 218, 217, 0.5);
 }
 .mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content li {
   margin: 0;
@@ -84,4 +84,31 @@
 .mui-off-canvas-wrap .mui-off-canvas-left .menu .menu-content li ul li {
   padding-left: 20px;
   padding: 10px 0px 10px 20px;
+}
+.mui-off-canvas-wrap .mui-inner-wrap .mui-bar {
+  line-height: 44px;
+}
+.mui-off-canvas-wrap .mui-inner-wrap .mui-bar .refresh {
+  display: block;
+  height: 44px;
+  width: 44px;
+  line-height: 44px;
+  padding-top: 10px;
+  color: #007aff;
+  float: right;
+}
+.mui-off-canvas-wrap .mui-inner-wrap .position,
+.mui-off-canvas-wrap .mui-inner-wrap .item {
+  width: 100px;
+  padding: 10px 0;
+  line-height: 20px;
+  font-size: 12px;
+  word-break: break-all;
+}
+.mui-off-canvas-wrap .mui-inner-wrap .reason {
+  margin-left: 103px;
+  margin-right: 103px;
+  line-height: 20px;
+  padding: 10px 0;
+  font-size: 12px;
 }

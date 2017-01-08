@@ -35,10 +35,11 @@ var mTool = {
 			callback&&callback(err,resdata);
 		})
 	},
-	update: function(obj,id,new_schema,callback){
+	update: function(obj,idobj,new_schema,callback){
 		var news = new_schema || {};
-		console.log("news "+JSON.stringify(news))
-		obj.update({_id: id},news,function(err,resdata){
+		console.log("updataId "+idobj.id);
+		// console.log("news "+JSON.stringify(news))
+		obj.update({"id": idobj.id},news,function(err,resdata){
 			callback&&callback(err,resdata);
 		})
 
