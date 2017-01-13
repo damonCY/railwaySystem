@@ -1,89 +1,89 @@
 {
-	"index.html": {
-		"resources": [
-			"js/tool.js",
-			"js/jquery.min.js",
-			"css/common.css",
-			"js/mui.min.js",
-			"js/login.js",
-			"css/mui.min.css",
-			"img/bg.png",
-			"register.html"
-		],
-		"refer": [
-			"pages/main.html",
-			"register.html"
-		]
-	},
-	"pages/personal.html": {
-		"resources": [
-			"css/font-awesome.css",
-			"js/personal.js",
-			"css/header.css",
-			"js/tool.js",
-			"js/jquery.min.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"img/logo.png"
-		],
-		"refer": [
-			"pages/personedit.html",
-			"index.html"
-		]
-	},
-	"pages/main.html": {
-		"resources": [
-			"js/main.js",
-			"css/main.css",
-			"fonts/mui.ttf",
-			"css/font-awesome.min.css",
-			"img/logo.png",
-			"js/mui.js",
-			"fonts/fontawesome-webfont.woff2",
-			"js/tool.js",
-			"js/jquery.min.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"pages/mainsub.html",
-			"js/template.js"
-		],
-		"refer": [
-			"pages/personal.html",
-			"pages/emergency.html",
-			"pages/mainsub.html"
-		]
-	},
-	"register.html": {
-		"resources": [
-			"js/register.js",
-			"index.html"
-		],
-		"refer": [
-			"index.html"
-		]
-	},
-	"pages/personedit.html": {
-		"resources": [
-			"css/header.css"
-		]
-	},
-	"pages/emergency.html": {
-		"resources": [
-			"css/font-awesome.css",
-			"js/emergency.js",
-			"css/header.css",
-			"js/tool.js",
-			"js/jquery.min.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css"
-		]
-	},
-	"pages/mainsub.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "js/tool.js",
+      "js/jquery.min.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "js/login.js",
+      "css/mui.min.css",
+      "img/bg.png",
+      "register.html"
+    ],
+    "refer": [
+      "pages/main.html",
+      "register.html"
+    ]
+  },
+  "pages/personal.html": {
+    "resources": [
+      "css/font-awesome.css",
+      "js/personal.js",
+      "css/header.css",
+      "js/tool.js",
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "img/logo.png"
+    ],
+    "refer": [
+      "pages/personedit.html",
+      "index.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "js/main.js",
+      "css/main.css",
+      "fonts/mui.ttf",
+      "css/font-awesome.min.css",
+      "img/logo.png",
+      "js/mui.js",
+      "fonts/fontawesome-webfont.woff2",
+      "js/tool.js",
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "pages/mainsub.html",
+      "js/template.js"
+    ],
+    "refer": [
+      "pages/personal.html",
+      "pages/emergency.html",
+      "pages/mainsub.html"
+    ]
+  },
+  "register.html": {
+    "resources": [
+      "js/register.js",
+      "index.html"
+    ],
+    "refer": [
+      "index.html"
+    ]
+  },
+  "pages/personedit.html": {
+    "resources": [
+      "css/header.css"
+    ]
+  },
+  "pages/emergency.html": {
+    "resources": [
+      "css/font-awesome.css",
+      "js/emergency.js",
+      "css/header.css",
+      "js/tool.js",
+      "js/jquery.min.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "pages/mainsub.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ]
+  }
 }

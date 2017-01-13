@@ -1,6 +1,7 @@
 tool.ready(function(){
 
 	var phone = tool.getItem("user","phone");
+	console.log("this phone"+ phone)
 	if(Number(phone)){
 		$('#phone').val(phone);
 	}else{

@@ -15,7 +15,7 @@ tool.ready(function(){
 				if(data.status==0){
 					mui.toast("此账号已被注册，请选择其他账号");return;
 				}else{
-					tool.getItem("user",{"phone": phone});
+					tool.setItem("user",{"phone": phone});
 					tool.open({"url": "./index.html","data":{"phone": name}})
 					mui.toast("注册成功");
 				}

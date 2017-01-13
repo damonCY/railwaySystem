@@ -89,18 +89,22 @@ module.exports = function(app){
 			}
 		})
 	});
+
+	//上传故障
 	app.post('/notice/upload',function(req,res){
 		var obj = {};
 		var id = req.body.id;
 		var etag = req.body.etag;
+		console.log('getTag '+etag);
 		for(var key in req.body){
 			obj[key] = req.body[key];
 		}
 		console.log("getBody "+JSON.stringify(obj));
 		mTool.find(schemas.noticeList,{"id": id},function(err,data){//查询存在
 			var data = data[0];
-			console.log("dataetag ",etag == data.etag);
-			if(!data || etag!=data.etag){
+			console.log('查询是否存在etag '+ JSON.stringify(data))
+			console.log('typeof ---'+  typeof(data));
+			if(!('etag' in data) ){
 				
 				mTool.insert(schemas.noticeList,obj, //不存在就添加
 					function(err,data){

@@ -9,6 +9,7 @@ tool.ready(function(){
 	};//上传参数
 	
 	//获取一个创建id
+	console.log("getetag");
 	tool.getEtag(function(data){
 		console.log("newetag "+data.data.etag);
 		params.etag = data.data.etag;

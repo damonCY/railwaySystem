@@ -51,10 +51,7 @@ var tool = {
 			waiting:{
 		      autoShow:true,//自动显示等待框，默认为true
 		      title:'正在加载...',//等待对话框上显示的提示内容
-		   },
-//		    styles: {
-//              popGesture: 'close' // 'hide', 'close','none'
-//          }
+		   }
 		});
 	},
 	schema: "http://sun4343lee.imwork.net",
