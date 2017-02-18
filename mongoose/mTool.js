@@ -16,26 +16,29 @@
 
 var mTool = {
 	insert:function(obj,schema,callback){
-		console.log("tool "+JSON.stringify(schema))
+		console.log("tool-----insert ");
 		var o = new obj(schema);
 		o.save(function(err,res){
 			callback&&callback(err,res);
 		})
 	},
 	find: function(obj,schema,callback){
+		console.log("tool-----find ");
 		var sche = schema || {};
 		obj.find(sche,function(err,resdata){
 
 			callback&&callback(err,resdata);
-		})
+		}).sort({'_id':-1});
 	},
 	delet: function(obj,schema,callback){
+		console.log("tool-----delet ");
 		var sche = schema || {};
 		obj.remove(sche,function(err,resdata){
 			callback&&callback(err,resdata);
 		})
 	},
 	update: function(obj,idobj,new_schema,callback){
+		console.log("tool-----update ")
 		var news = new_schema || {};
 		console.log("updataId "+idobj.id);
 		// console.log("news "+JSON.stringify(news))
@@ -43,6 +46,12 @@ var mTool = {
 			callback&&callback(err,resdata);
 		})
 
+	},
+	isEmptyObject: function(obj){
+		for(key in obj){
+			return false;
+		}
+		return true;
 	}
 }
 

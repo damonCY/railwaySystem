@@ -31,6 +31,9 @@ body .header {
 body .header .save {
   font-size: 15px;
 }
+body .mui-bar .mui-btn {
+  padding: 4px 12px 4px;
+}
 body .mui-bar-nav {
   box-shadow: none;
   text-shadow: none;

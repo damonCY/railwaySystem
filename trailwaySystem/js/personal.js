@@ -57,7 +57,6 @@ function init(){
 	$("#birthday").text(user["birthday"]);
 	$("#userType").text(user["userType"]);
 	$("#phone").text(user["phone"]);
-	console.log(user["photo"]);
 	if(user["photo"]){
 		$('#photo').attr('src',user['photo']);
 	}else{
@@ -135,6 +134,7 @@ function gallery(){
 	plus.gallery.pick( function(path){
 	    	console.log("22"+path);
 	    	tool.setItem('user',{"photo": path});
+	    	tool.open({"url":"../pages/photo.html","data":path});
 	    	$('.my-photo img').attr('src',path);
 	    	tool.reload();
 	    }, function ( e ) {

@@ -2,12 +2,7 @@ tool.ready(function(){
 
 	var phone = tool.getItem("user","phone");
 	console.log("this phone"+ phone)
-	if(Number(phone)){
-		$('#phone').val(phone);
-	}else{
-		tool.removeItem("user");
-	}
-	
+	tool.removeItem("user");//删除本地数据，重新更新
 	function getForm(){
 		var phone = $('#phone').val();
 		var pwd = $('#pwd').val();
@@ -20,14 +15,13 @@ tool.ready(function(){
 				"password": pwd
 			},
 			success: function(data){
-				mui.toast(data);
 				if(data.status==0){
 					mui.toast(data.data);
 					return;
 				}else{
-					tool.setItem("user",data.data);
-					console.log("login "+JSON.stringify(data.data))
 					mui.toast("sucess");
+					tool.setItem("user",data.data);
+//					console.log("login "+JSON.stringify(data.data))
 					tool.open({"url":'pages/main.html'});
 				}
 			},

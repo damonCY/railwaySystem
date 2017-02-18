@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/cropper.min.css" />
+		<link rel="stylesheet" href="../css/header.css" />
+		<style type="text/css">
+			img {
+			  	max-width: 100%; /* This rule is very important, please do not ignore this! */
+				max-height: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">头像编辑</h1>
+			<button type="button" class="mui-btn mui-btn-outlined mui-pull-right save" id="save">保存</button>
+		</header>
+		<div class="mui-content">
+			<div class="container">
+			   <img id="image" src="">
+			</div>  
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<script type="text/javascript">
+		mui.init()
+	</script>
+	
+	<script src="../js/cropper.min.js"></script>
+	<script src="../js/tool.js"></script>
+	<script>
+	$(function(){
+		tool.plusReady(function(){
+				
+				$('#save').on('tap',function(){
+					canvas();
+				})
+				var self = plus.webview.currentWebview();
+					console.log('current '+self.data);
+				$('#image').attr('src',self.data);
+//				return;
+				var promises = new Promise(function(resolve,reject){
+					$('#image').attr('src',self.data);
+					resolve();
+				});
+				promises.then(function(){
+					$('#image').cropper({
+						  aspectRatio: 16 / 9,
+						  crop: function(e) {
+						    // Output the result data for cropping image.
+//						    console.log("ex"+e.x);
+//						    console.log("ey"+e.y);
+//						    console.log("ew"+e.width);
+//						    console.log("eh"+e.height);
+						  }
+						});
+						
+				});
+				
+				
+				function canvas(){
+					var img = $('#image');
+					var nowImg = img.cropper('getImageData');
+					console.log('now image'+JSON.stringify(nowImg));
+					var nowBox = img.cropper('getCropBoxData');
+					console.log('nowBox '+JSON.stringify(nowBox));
+					var canvas = document.createElement('canvas');
+						canvas.height = nowImg.height;
+						canvas.width = nowImg.width;
+					var cxt = canvas.getContext('2d');
+					var targetImg = document.getElementById('image');
+					cxt.drawImage(targetImg,nowBox.left,nowBox.top,nowBox.width,nowBox.height,0,0,nowImg.width,nowImg.height);
+					var data = canvas.toDataURL("image/jpeg", 0.3);
+					console.log(data);
+					tool.setItem('photo',{"data": data});
+					tool.reload();
+					mui.back();
+
+				}
+			})
+	})
+			
+	</script>
+</html>

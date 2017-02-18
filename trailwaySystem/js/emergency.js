@@ -43,7 +43,7 @@ tool.ready(function(){
 			type:"POST",
 			data: params,
 			success: function(data){
-				console.log("ajax "+JSON.stringify(data))
+//				console.log("ajax "+JSON.stringify(data))
 				if(data.status == 1){
 					mui.toast("上报成功");
 				}else{

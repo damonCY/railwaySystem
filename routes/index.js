@@ -92,6 +92,7 @@ module.exports = function(app){
 
 	//上传故障
 	app.post('/notice/upload',function(req,res){
+		console.log("saving")
 		var obj = {};
 		var id = req.body.id;
 		var etag = req.body.etag;
@@ -101,11 +102,10 @@ module.exports = function(app){
 		}
 		console.log("getBody "+JSON.stringify(obj));
 		mTool.find(schemas.noticeList,{"id": id},function(err,data){//查询存在
-			var data = data[0];
+			var data = data[0] || {};
 			console.log('查询是否存在etag '+ JSON.stringify(data))
-			console.log('typeof ---'+  typeof(data));
-			if(!('etag' in data) ){
-				
+			console.log('typeof ---'+  mTool.isEmptyObject(data));
+			 if(mTool.isEmptyObject(data)||("etag" in data)&&etag !=data['etag']){
 				mTool.insert(schemas.noticeList,obj, //不存在就添加
 					function(err,data){
 					if(err){

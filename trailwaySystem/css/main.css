@@ -97,6 +97,9 @@
   color: #007aff;
   float: right;
 }
+.mui-off-canvas-wrap .mui-inner-wrap .mui-bar .mui-btn {
+  top: 5px;
+}
 .mui-off-canvas-wrap .mui-inner-wrap .position,
 .mui-off-canvas-wrap .mui-inner-wrap .item {
   width: 100px;
@@ -111,4 +114,10 @@
   line-height: 20px;
   padding: 10px 0;
   font-size: 12px;
+}
+.mui-off-canvas-wrap .mui-inner-wrap .main-refresh {
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin-top: -40px;
 }
