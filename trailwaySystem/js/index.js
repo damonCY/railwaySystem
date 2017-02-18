@@ -1,4 +1,10 @@
-tool.ready(function(){
+tool.plusReady(function(){
+	var user = tool.getItem("user");
+	console.log("user-------"+JSON.stringify(user));
+	if(!user.password){
+		tool.open({url:"./pages/login.html"});
+		return;
+	}
 	mui.init({
 	    pullRefresh : {
 	    container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -15,7 +21,25 @@ tool.ready(function(){
 	    }
 	  }
 	});
-	var user = tool.getItem("user")
+	showAllPage();
+	function showAllPage(){
+		var pages = plus.webview.all();
+		var indexPage = plus.webview.getLaunchWebview();
+		pages.forEach(function(value,index){
+			console.log("value "+JSON.stringify(value));
+		})
+		console.log("index--------------"+JSON.stringify(indexPage));
+	}
+	window.addEventListener("refreshPhoto",function(e){
+		console.log('change_photo----------');
+		var path = e.detail.data;
+//		var user = tool.getItem("user");
+		$('.photo').attr('src',path);
+	});
+	window.addEventListener('refreshName',function(e){
+		var name = e.detail.data;
+		$('#username').text(name);
+	})
 	mui('.mui-scroll-wrapper').scroll({
 	    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 	});
@@ -23,7 +47,20 @@ tool.ready(function(){
 		$('.item-two').on('touchstart','li',function(){
 			$(this).addClass('active')
 		})
-		
+		$('.tap_active').on({
+			touchstart: function(){
+				console.log("touchstart---------------");
+				$(this).addClass('active_');
+			},
+			touchend: function(){
+				console.log("touchend---------------");
+				$(this).removeClass('active_')
+			}
+		})
+		$('.exit').on('tap',function(){
+			tool.setItem("user",{password:""})
+			tool.open({url:"./pages/login.html"});
+		})
 		var clear = "";
 		//刷新
 		$("#update").on('tap',function(){
@@ -39,13 +76,18 @@ tool.ready(function(){
 		});
 		
 		$('.tip-content').on('tap',function(){
-			tool.open({url: "../pages/personal.html"});
+			tool.open({url: "./pages/personal.html"});
 		});
 		
 		$('.photo').attr('src',user.photo);
 		
+		$('#username').text(user.name);
+		
 		$('.emergency').on('tap',function(){
-			tool.open({url: "../pages/emergency.html"});
+			tool.open({url: "./pages/emergency.html"});
+		})
+		$('#show_left').on('tap',function(){
+			mui('.mui-off-canvas-wrap').offCanvas().show();
 		})
 //		$('body').on('swipedown',function(){
 //			console.log("你正在向下滑动")

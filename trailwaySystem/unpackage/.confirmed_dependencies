@@ -8,11 +8,22 @@
 			"js/login.js",
 			"css/mui.min.css",
 			"img/bg.png",
-			"register.html"
+			"register.html",
+			"css/main.css",
+			"fonts/mui.ttf",
+			"css/font-awesome.min.css",
+			"img/logo.png",
+			"js/template.js",
+			"js/mui.js",
+			"fonts/fontawesome-webfont.woff2",
+			"js/index.js"
 		],
 		"refer": [
 			"pages/main.html",
-			"register.html"
+			"register.html",
+			"pages/login.html",
+			"pages/personal.html",
+			"pages/emergency.html"
 		]
 	},
 	"pages/personal.html": {
@@ -66,7 +77,12 @@
 	},
 	"pages/personedit.html": {
 		"resources": [
-			"css/header.css"
+			"css/header.css",
+			"js/tool.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
 		]
 	},
 	"pages/emergency.html": {
@@ -97,6 +113,17 @@
 			"fonts/mui.ttf",
 			"css/mui.min.css",
 			"css/header.css"
+		]
+	},
+	"pages/login.html": {
+		"resources": [
+			"css/common.css",
+			"js/mui.min.js",
+			"js/login.js",
+			"img/bg.png",
+			"js/tool.js",
+			"js/jquery.min.js",
+			"css/mui.min.css"
 		]
 	}
 }

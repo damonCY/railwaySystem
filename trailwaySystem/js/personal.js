@@ -2,7 +2,7 @@ tool.ready(function(){
 	mui.init({
 		swipeBack:true //启用右滑关闭功能, 
 	});
-	
+	var params = {};
 	init(); //初始化显示
 	tool.plusReady(function(){
 		var pages = plus.webview.all();
@@ -12,14 +12,13 @@ tool.ready(function(){
 	})
 	$('.submit').on('tap',function(){
 //		mui.prompt('你确定退出登录吗？',['true','false'],null,'div');
-		mui.confirm("",'你确定退出登录吗?',['确定','再看看'],function(data){
+		mui.confirm("",'你确定退出应用吗?',['确定','再看看'],function(data){
 			var index = data.index;
 			if(index === 0){
 				var pages = plus.webview.all();
 				for (var i = 0, len = pages.length; i < len; i++) {
 					plus.webview.close(pages[i]);
 				}
-				tool.open({"url":"../index.html"})
 			}
 		},'div');
 	})
@@ -36,7 +35,6 @@ tool.ready(function(){
 			"inputValue": value ,
 			"type": "name"
 		}
-		tool.setItem("extras",data);
 		tool.open({"url":"../pages/personedit.html","data":data});
 	})
 	$('.userType').on('tap',function(){
@@ -48,6 +46,12 @@ tool.ready(function(){
 	})
 	$('.my-photo').on('tap',function(){
 		gallery();
+	})
+	window.addEventListener('refreshName',function(e){
+		var newName = e.detail.data;
+		$('#name').text(newName);
+		tool.setItem('user',{"name": newName});
+//		params["name"] = newName;
 	})
 function init(){
 	var user = tool.getItem('user');
@@ -75,18 +79,23 @@ function showActionSheet(){
 			console.log("thisgender11 "+gender);
 			$("#gender").text(gender);
 			tool.setItem('user',{"gender": gender});
+//			params["gender"] = gender;
 		}
 	)
 }
 function save(){
 	var obj = tool.getItem('user');
-	console.log("total "+JSON.stringify(obj));
+//	console.log("total "+JSON.stringify(obj));
+//	console.log("storage type"+typeof obj);
 	$.ajax({
 		url: tool.schema + "/personal/save",
 		type: "POST",
 		data: obj,
 		success: function(data){
 			if(data.ok == 1){
+				var index =  plus.runtime.appid;
+				var name = $('#name').text();
+				tool.fire(index,"refreshName",name);
 				mui.toast('save success');
 			}
 		},
@@ -111,9 +120,9 @@ function userType(){
 			}else{
 				type = "站台服务人员4";
 			}
-			console.log("thisgender11 "+gender);
 			$("#userType").text(type);
 			tool.setItem('user',{"userType": type});
+//			params["userType"] = type;
 		}
 	)
 }
@@ -125,6 +134,7 @@ function pickDate() {
 		var birthday = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
 		$("#birthday").text(birthday);
 		tool.setItem("user",{"birthday": birthday});
+//		params["birthday"] = birthday;
 	},function(e){
 		console.log( "未选择日期："+e.message );
 	});
@@ -132,11 +142,11 @@ function pickDate() {
 
 function gallery(){
 	plus.gallery.pick( function(path){
-	    	console.log("22"+path);
 	    	tool.setItem('user',{"photo": path});
-	    	tool.open({"url":"../pages/photo.html","data":path});
+//	    	tool.open({"url":"../pages/photo.html","data":path});
 	    	$('.my-photo img').attr('src',path);
-	    	tool.reload();
+	    	var index = plus.runtime.appid;
+			tool.fire(index,"refreshPhoto",path);
 	    }, function ( e ) {
 	    	console.log( "取消选择图片" );
 	    }, {filter:"image"} );

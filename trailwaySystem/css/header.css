@@ -6,6 +6,11 @@ html {
   height: 100%;
 }
 body {
+  font-family: Microsoft Yahei,SimSun,Helvetica;
+  -webkit-font-smoothing: antialiased;
+  /*chrome、safari*/
+  -moz-osx-font-smoothing: grayscale;
+  /*firefox*/
   position: relative;
   font-size: 15px;
   font-family: sans-serif;

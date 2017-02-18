@@ -1,14 +1,8 @@
 var tool = {
 	ready: function(callback){
-		if(window.plusready){
-			mui.plusReady(function(){
-				callback&&callback();
-			})
-		}else{
-			mui.ready(function(){
-				callback&&callback()
-			})
-		}
+		mui.ready(function(){
+			callback&&callback()
+		})
 	},
 	setItem: function(name,obj){
 		var local = localStorage.getItem(name);
@@ -42,7 +36,7 @@ var tool = {
 		return localStorage.clear();
 	},
 	open: function(params){
-		return mui.openWindow({"url": params.url,"id":params.url,"extras": {"data":params.data},
+		return mui.openWindow({"url": params.url,"id":params.url,"extras": params.data,
 			show:{
 		      autoShow:true,//页面loaded事件发生后自动显示，默认为true
 		      aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
@@ -53,6 +47,18 @@ var tool = {
 		      title:'正在加载...',//等待对话框上显示的提示内容
 		   }
 		});
+	},
+	openInfo: function(){
+		return data = plus.webview.currentWebview();
+	},
+	close: function(targetPage){
+		if(!targetPage){
+			var targetPage =  plus.webview.currentWebview();
+			console.log("colose success!")
+				targetPage.close();
+		}else{
+			targetPage.close();
+		}
 	},
 	schema: "http://sun4343lee.imwork.net",
 	reload: function(id){
@@ -95,5 +101,9 @@ var tool = {
 				mui.toast("创建失败");
 			}
 		})
+	},
+	fire: function(targetPageId,eventName,data){
+		var targetPage = plus.webview.getWebviewById(targetPageId);
+		mui.fire(targetPage,eventName,{"data": data});
 	}
 }

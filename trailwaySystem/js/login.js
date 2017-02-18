@@ -1,9 +1,14 @@
-tool.ready(function(){
+tool.plusReady(function(){
 
 	var phone = tool.getItem("user","phone");
-	console.log("this phone"+ phone)
-	tool.removeItem("user");//删除本地数据，重新更新
+		$('#phone').val(phone);
+	window.addEventListener("refreshphone",function(e){
+		var phoneNumber = e.detail.data;
+		$('#phone').val(phone);
+	})
+//	tool.removeItem("user");//删除本地数据，重新更新
 	function getForm(){
+		console.log("login")
 		var phone = $('#phone').val();
 		var pwd = $('#pwd').val();
 		if(phone&&pwd){}else{mui.toast("请填写完整");return};
@@ -22,11 +27,13 @@ tool.ready(function(){
 					mui.toast("sucess");
 					tool.setItem("user",data.data);
 //					console.log("login "+JSON.stringify(data.data))
-					tool.open({"url":'pages/main.html'});
+					var index =  plus.webview.getLaunchWebview();
+					index.reload();
+					mui.back();
 				}
 			},
 			error: function(err){
-				console.log("err "+err);
+				console.log("err "+JSON.stringify(err));
 			}
 		})
 		

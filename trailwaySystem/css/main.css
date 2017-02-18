@@ -21,8 +21,9 @@
   color: #fff;
   font-size: 16px;
 }
-.mui-off-canvas-wrap .mui-off-canvas-left .menu .mui-table-view {
-  background-color: transparent;
+.mui-off-canvas-wrap .mui-off-canvas-left .menu .active_ {
+  background: rgba(216, 218, 217, 0.5) !important;
+  color: #fff;
 }
 .mui-off-canvas-wrap .mui-off-canvas-left .menu i {
   margin-right: 5px;
@@ -31,6 +32,7 @@
   padding: 10px 10px 10px 20px;
   color: #8f8f94;
   overflow: hidden;
+  background-color: #fff;
 }
 .mui-off-canvas-wrap .mui-off-canvas-left .menu .user-type .photo {
   float: left;

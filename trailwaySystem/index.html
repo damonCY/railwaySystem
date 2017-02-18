@@ -1,35 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <script src="js/mui.min.js"></script>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/common.css" />
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
-</head>
-<body class="login">
-	<div class="login-content">
-		<div class="tip"><a href="register.html">register</a></div>
-		<div class="content">
-			<form id="form">
-			<div class="input-content">
-				<input type="text" name="phone" id="phone" placeholder="账号"/>
-			</div>
-			<div class="input-content">
-				<input type="text" name="pwd" id="pwd" placeholder="密码"/>
-			</div>
-			<div class="input-content">
-				<input class="button" type="button" value="Login in"  readonly="readonly"/>
-			</div>
-			</form>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="./css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="./css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<!-- 侧滑导航根容器 -->
+		<div class="mui-off-canvas-wrap mui-draggable mui-slide-in">
+		  <!-- 菜单容器 -->
+		  <aside class="mui-off-canvas-left">
+		    <div class="mui-scroll-wrapper">
+		      <div class="mui-scroll" style="z-index: 1000;">
+		        <!-- 菜单具体展示内容 -->
+		        <nav class="menu">
+		        	<nav class="user-type tap_active" >
+		        		<div class="photo">
+		        			<img src="./img/logo.png" alt="" class="photo"/>
+		        		</div>
+		        		<div class="tip-content">
+		        			<p class="name" id="username">sun4343lee</p>
+		        			<p class="role-type"><i class="fa fa-user-o"></i>列车管理员</p>
+		        		</div>
+		        	</nav>
+		        	<div class="border-bottom"></div>
+		        	<ul class="menu-content">
+		        		<li class="item-one">
+		        			<a href="#"><i class="fa fa-train"></i>应急预案管理</a>
+		        			<ul class="item-two">
+		        				<li><a href="">预案数字化管理</a></li>
+		        				<li><a href="">预案学习</a></li>
+		        				<li><a href="">预案测试</a></li>
+		        			</ul>
+		        		</li>
+		        		<li class="item-one">
+		        			<a href="#"><i class="fa fa-train"></i>应急处置</a>
+		        			<ul class="item-two">
+		        				<li class="emergency"><a href="">车辆故障</a></li>
+		        				<li><a href="">大客流处置</a></li>
+		        				<li><a href="">火灾处置</a></li>
+		        				<li><a href="">其他</a></li>
+		        			</ul>
+		        		</li>
+		        		<li class="item-one">
+		        			<a href="#"><i class="fa fa-list-alt"></i>案例案管理</a>
+		        			<ul class="item-two">
+		        				<li><a href="">故障处理记录</a></li>
+		        			</ul>
+		        		</li>
+		        		<li class="exit tap_active">
+		        			<a href="#">退出登录</a>
+		        		</li>
+		        	</ul>
+		        </nav>
+		      </div>
+		    </div>
+		  </aside>
+		  <!-- 主页面容器 -->
+		  <div class="mui-inner-wrap">
+		    <!-- 主页面标题 -->
+		    <header class="mui-bar mui-bar-nav">
+			    <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" id="show_left"></a>
+			    <h1 class="mui-title">列车处置列表</h1>
+			    <button type="button" class="mui-btn mui-btn-outlined mui-pull-right" id="update">刷新</button>
+		    </header>
+		    <div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+		      <div class="mui-scroll">
+		      	<!--<div class="main-refresh"><i class="fa fa-refresh fa-spin"></i>正在刷新...</div>-->
+		        <!-- 主界面具体展示内容 -->
+		      	<div class="list-content" id="noticeList">
+		      		<ul class="mui-table-view" id="template">
+		      			<!--<li class="mui-table-view-cell">
+		      				<div class="position mui-pull-left">
+		      					position
+		      				</div>
+		      				<div class="item mui-pull-right">
+		      					item
+		      				</div>
+		      				<div class="reason">
+		      					reason
+		      				</div>
+		      				
+		      			</li>-->
+		      		</ul>
+		      	</div>
+
+		      </div>
+		    </div>  
+		  </div>
 		</div>
-	</div>
+		<script id="templateModel" type="text/html">
+			{{each data as item}}
+			<li class="mui-table-view-cell">
+				<div class="position mui-pull-left">
+					{{item.positions}}
+				</div>
+				<div class="item mui-pull-right">
+					{{item.time}}
+				</div>
+				<div class="reason">
+					{{item.reason}}
+				</div>
+			</li>
+			{{/each}}
+		</script>
+<script type="text/javascript" src="./js/mui.js"></script>
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/template.js"></script>
+<script type="text/javascript" src="./js/tool.js"></script>
 </body>
-<script src="js/jquery.min.js"></script>
-<script src="js/tool.js"></script>
-<script src="js/login.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
 </html>

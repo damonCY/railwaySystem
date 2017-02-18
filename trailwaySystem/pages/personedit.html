@@ -32,16 +32,14 @@
 	})
 </script>
 <script>
-	tool.ready(function(){
-		var data = tool.getItem('extras');
+	tool.plusReady(function(){
+		var data = tool.openInfo();
 		$('.mui-title').text(data.title);
 		$('#input').val(data.inputValue);
 		$('.save').on('tap',function(){
 			var value = $('#input').val();
 			if(value){
-				var type = data.type || "";
-				tool.setItem("user",{"name": value});
-				tool.reload("../pages/personal.html");
+				tool.fire("./pages/personal.html","refreshName",value);
 				mui.back();
 			}else{
 				mui.toast("请输入"+data.title);

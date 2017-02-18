@@ -14,10 +14,10 @@ tool.ready(function(){
 			success: function(data){
 				if(data.status==0){
 					mui.toast("此账号已被注册，请选择其他账号");return;
-				}else{
-					tool.setItem("user",{"phone": phone});
-					tool.open({"url": "./index.html","data":{"phone": name}})
+				}else{				
+					tool.open({"url": "./login.html","data":{"phone": phone}})
 					mui.toast("注册成功");
+					tool.fire("./pages/login.html","refreshphone",phone);
 				}
 			},
 			error: function(err){

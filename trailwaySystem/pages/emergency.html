@@ -12,16 +12,19 @@
 			.content .label{
 				float: left;
 				width: 90px;
+				font-size: 15px;
 				line-height: 45px;
 			}
 			.content .input-content{
 				margin-left: 90px;
+				font-size: 12px;
 			}
 			.content .input-content input{
 				margin-bottom: 0px;
 			}
-			.content .textareaLabel{
-				line-height: 60px;
+			textarea,input{
+				margin: 0;
+				font-size: 13px;
 			}
 		</style>
 	</head>
@@ -30,23 +33,23 @@
 		<header class="mui-bar mui-bar-nav header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">接警</h1>
-			<a href="#" class=" mui-pull-right save">上报</a>
+			<button  type="button" class="mui-btn mui-btn-outlined mui-pull-right" id="form">上报</button>
 		</header>
 		<div class="mui-content content ">
 			<ul class="mui-table-view">
-				<li class="mui-table-view-celll">
+				<li class="mui-table-view-cell">
 					<div class="label">位置</div>
 					<div class="input-content">
 						<input type="text" value="岗厦上行线" readonly="readonly" id="positions"/>
 					</div>
 				</li>
-				<li class="mui-table-view-celll">
+				<li class="mui-table-view-cell">
 					<div class="label">车次</div>
 					<div class="input-content">
 						<input type="text" value="车次号" readonly="readonly" id="train"/>
 					</div>
 				</li>
-				<li class="mui-table-view-celll">
+				<li class="mui-table-view-cell">
 					<div class="label textareaLabel">故障原因</div>
 					<div class="input-content">
 						<!--<input type="text" value=" 故障原因" readonly="readonly" id="reason"/>-->

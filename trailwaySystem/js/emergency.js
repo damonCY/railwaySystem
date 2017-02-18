@@ -15,7 +15,7 @@ tool.ready(function(){
 		params.etag = data.data.etag;
 	})
 	
-	$('.save').on('tap',function(){
+	$('#form').on('tap',function(){
 		console.log("save")
 		uploadNotice(params);
 	})

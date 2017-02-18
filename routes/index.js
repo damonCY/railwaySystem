@@ -54,9 +54,10 @@ module.exports = function(app){
 
 		var phone = req.body.phone;
 		var password = req.body.password;
-		// console.log(phone,password);
+		console.log(phone,password);
 		mTool.find(schemas.personal,{"phone": phone},function(err,data){
 			var data = data[0];
+			console.log("from-----login---"+data)
 			if(!data){
 				res.send({"status": "0","data": "账号输入有误"});
 				return;

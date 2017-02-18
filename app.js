@@ -19,7 +19,7 @@ app.all('*', function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: false }));  
 app.use(express.static(path.join(__dirname,'public')));
-app.listen(3000);
+app.listen(4000);
 
 var routes = require('./routes')(app);
 console.log('start')
