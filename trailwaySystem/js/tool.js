@@ -60,7 +60,8 @@ var tool = {
 			targetPage.close();
 		}
 	},
-	schema: "http://sun4343lee.imwork.net",
+//	schema: "http://sun4343lee.imwork.net",
+	schema: "http://sun4343lee.top:4000",
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);

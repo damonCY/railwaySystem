@@ -1,7 +1,9 @@
 tool.plusReady(function(){
 
-	var phone = tool.getItem("user","phone");
+	var user = tool.getItem("user");
+	if(user.phone){
 		$('#phone').val(phone);
+	}
 	window.addEventListener("refreshphone",function(e){
 		var phoneNumber = e.detail.data;
 		$('#phone').val(phone);

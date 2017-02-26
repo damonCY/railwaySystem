@@ -15,6 +15,7 @@ tool.ready(function(){
 		mui.confirm("",'你确定退出应用吗?',['确定','再看看'],function(data){
 			var index = data.index;
 			if(index === 0){
+				tool.clear();
 				var pages = plus.webview.all();
 				for (var i = 0, len = pages.length; i < len; i++) {
 					plus.webview.close(pages[i]);

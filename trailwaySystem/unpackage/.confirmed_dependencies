@@ -123,7 +123,19 @@
 			"img/bg.png",
 			"js/tool.js",
 			"js/jquery.min.js",
-			"css/mui.min.css"
+			"css/mui.min.css",
+			"pages/register.html"
+		],
+		"refer": [
+			"pages/register.html"
+		]
+	},
+	"pages/register.html": {
+		"resources": [
+			"js/register.js"
+		],
+		"refer": [
+			"pages/login.html"
 		]
 	}
 }
