@@ -61,7 +61,8 @@ var tool = {
 		}
 	},
 //	schema: "http://sun4343lee.imwork.net",
-	schema: "http://sun4343lee.top:4000",
+//	schema: "http://sun4343lee.top:4000",
+	schema: "http://10.232.35.16:4000",
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);
@@ -96,6 +97,8 @@ var tool = {
 			success: function(data){
 				if(data.status ==1){
 					callback&&callback(data);
+				}else{
+					mui.toast("创建失败");
 				}
 			},
 			error: function(data){

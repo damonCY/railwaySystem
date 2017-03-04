@@ -16,7 +16,8 @@
 			"js/template.js",
 			"js/mui.js",
 			"fonts/fontawesome-webfont.woff2",
-			"js/index.js"
+			"js/index.js",
+			"img/arrow_right.png"
 		],
 		"refer": [
 			"pages/main.html",
@@ -132,7 +133,13 @@
 	},
 	"pages/register.html": {
 		"resources": [
-			"js/register.js"
+			"js/register.js",
+			"js/tool.js",
+			"js/jquery.min.js",
+			"css/common.css",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"pages/login.html"
 		],
 		"refer": [
 			"pages/login.html"

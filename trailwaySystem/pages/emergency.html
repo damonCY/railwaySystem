@@ -22,9 +22,16 @@
 			.content .input-content input{
 				margin-bottom: 0px;
 			}
+			.mui-table-view{
+				margin-bottom: 20px;
+			}
 			textarea,input{
 				margin: 0;
 				font-size: 13px;
+			}
+			.button{
+				border: 0px;
+				margin-right: 15px;
 			}
 		</style>
 	</head>
@@ -33,30 +40,31 @@
 		<header class="mui-bar mui-bar-nav header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">接警</h1>
-			<button  type="button" class="mui-btn mui-btn-outlined mui-pull-right" id="form">上报</button>
 		</header>
 		<div class="mui-content content ">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="label">位置</div>
 					<div class="input-content">
-						<input type="text" value="岗厦上行线" readonly="readonly" id="positions"/>
+						<input type="text" value="" readonly="readonly" id="positions" placeholder="请选择位置"/>
 					</div>
 				</li>
 				<li class="mui-table-view-cell">
 					<div class="label">车次</div>
 					<div class="input-content">
-						<input type="text" value="车次号" readonly="readonly" id="train"/>
+						<input type="text" value="" id="train" placeholder="请填写车次号"/>
 					</div>
 				</li>
 				<li class="mui-table-view-cell">
-					<div class="label textareaLabel">故障原因</div>
+					<div class="label textareaLabel">故障部位</div>
 					<div class="input-content">
 						<!--<input type="text" value=" 故障原因" readonly="readonly" id="reason"/>-->
-						<textarea  value="故障原因" readonly="readonly" id="reason"rows="" cols="">故障原因</textarea>
+						<textarea  value="" readonly="readonly" id="reason" rows="" cols="" placeholder="请填写故障部位"></textarea>
 					</div>
 				</li>
 			</ul>
+			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="form">确定</button>
+			<button type="button" class="mui-btn mui-pull-right" style="margin-right: 15px;" id="cancel">取消</button>
 		</div>
 	</body>
 <script src="../js/mui.min.js"></script>

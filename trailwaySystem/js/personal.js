@@ -86,8 +86,6 @@ function showActionSheet(){
 }
 function save(){
 	var obj = tool.getItem('user');
-//	console.log("total "+JSON.stringify(obj));
-//	console.log("storage type"+typeof obj);
 	$.ajax({
 		url: tool.schema + "/personal/save",
 		type: "POST",
@@ -95,35 +93,29 @@ function save(){
 		success: function(data){
 			if(data.ok == 1){
 				var index =  plus.runtime.appid;
-				var name = $('#name').text();
-				tool.fire(index,"refreshName",name);
+				var send_data = {
+					name: $('#name').text() || "sun4343lee",
+					userType: $('#userType').text()|| "profession"
+				}
+				tool.fire(index,"refreshName",JSON.stringify(send_data));
 				mui.toast('save success');
 			}
 		},
 		error: function(err){
 			console.log("error "+err);
+			mui.toast('保存失败');
 		}
 	})
 }
 function userType(){
-	var bts=[{title:"站台服务人员1"},{title:"站台服务人员2"},{title:"站台服务人员3"},{title:"站台服务人员4"}];
-	var type = 1;
+	var bts=[{title:"主线司机台行调"},{title:"主线车站台行调"},{title:"复线"},{title:"管理层"}];
+	var type = 0;
 	plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
 		function(e){
-			type = e.index;
-			console.log('type '+ type)
-			if(type === 1){
-				type = "站台服务人员1";
-			}else if(type === 2){
-				type = "站台服务人员2";
-			}else if(type === 3){
-				type = "站台服务人员3";
-			}else{
-				type = "站台服务人员4";
-			}
-			$("#userType").text(type);
-			tool.setItem('user',{"userType": type});
-//			params["userType"] = type;
+			type = e.index-1;
+			console.log("type---"+type)
+			$("#userType").text(bts[type]["title"]);
+			tool.setItem('user',{"userType": bts[type]['title']});
 		}
 	)
 }

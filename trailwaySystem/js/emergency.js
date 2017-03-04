@@ -9,26 +9,28 @@ tool.ready(function(){
 	};//上传参数
 	
 	//获取一个创建id
-	console.log("getetag");
 	tool.getEtag(function(data){
 		console.log("newetag "+data.data.etag);
 		params.etag = data.data.etag;
 	})
 	
 	$('#form').on('tap',function(){
-		console.log("save")
 		uploadNotice(params);
 	})
 	$('#positions').one('tap',function(){
 		positions();
 	})
-	$('#train').one('tap',function(){
-		trainNumber();
-	})
+//	$('#train').one('tap',function(){
+//		trainNumber();
+//	})
 	$('#reason').one('tap',function(){
 		reason();
 	})
-	
+	$('#cancel').on('tap',function(){
+		var currentPage = plus.webview.currentWebview();
+		currentPage.reload();
+		mui.toast("已重置")
+	})
 	function uploadNotice(params){
 		params.positions = $("#positions").val().trim();
 		params.trainNumber = $("#train").val().trim();
@@ -57,83 +59,33 @@ tool.ready(function(){
 	}
 	
 	function positions(){
-		var bts=[{title:"岗厦上行线1"},{title:"岗厦上行线2"},{title:"岗厦上行线3"},{title:"岗厦上行线4"},{title:"岗厦上行线5"}];
+		var bts=[{title:"岗厦下行线"},{title:"竹子林下行线"},{title:"前海湾下行线"},{title:"会展中心上行线"},{title:"岗厦上行线"}];
 		plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
 			function(e){
-				var cases = "position"+e.index;
-				var positions = thisCase(cases);
-				console.log("positions "+positions);
-				$("#positions").removeAttr('readonly').val(positions);
+				var index = e.index -1;
+				$("#positions").removeAttr('readonly').val(bts[index]['title']);
 			}
 		)
 	}
 	
-	function trainNumber(){
-		var bts=[{title:"车次1"},{title:"车次2"},{title:"车次3"},{title:"车次4"}];
-		plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
-			function(e){
-				var cases = "train"+e.index;
-				var train = thisCase(cases);
-				console.log("train "+train);
-				$("#train").removeAttr('readonly').val(train);
-			}
-		)
-	}
+//	function trainNumber(){
+//		var bts=[{title:"车次1"},{title:"车次2"},{title:"车次3"},{title:"车次4"}];
+//		plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
+//			function(e){
+//				var index = e.index -1;
+//				$("#train").removeAttr('readonly').val(bts[index]['title']);
+//			}
+//		)
+//	}
 	
 	function reason(){
-		var bts=[{title:"故障原因1"},{title:"故障原因2"},{title:"故障原因3"},{title:"故障原因4"}];
+		var bts=[{title:"列车失电"},{title:"列车轮对固死"},{title:"车辆屏无故障显示"},{title:"发出报警声"}];
 		plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
 			function(e){
-				var cases = "reason"+e.index;
-				var reason = thisCase(cases);
-				console.log("reason "+reason);
-				$("#reason").removeAttr('readonly').val(reason);
+				var index = e.index -1;
+				$("#reason").removeAttr('readonly').val(bts[index]['title']);
 			}
 		)
 	}
-	function thisCase(type){
-		var value = '';
-		switch(type){ 
-			case "position1":
-			  	value = "岗厦上行线1"
-			    break;
-			case "position2":
-			  	value = "岗厦上行线2"
-			    break;
-			case "position3":
-			  	value = "岗厦上行线3"
-			    break;
-			case "position4":
-			  	value = "岗厦上行线4"
-			    break;
-			case "train1":
-			  	value = "车次号1"
-			    break;
-			case "train2":
-			  	value = "车次号2"
-			    break;
-			case "train3":
-			  	value = "车次号3"
-			    break;
-			case "train4":
-			  	value = "车次号4"
-			    break;
-			case "reason1":
-			  	value = "故障1"
-			    break;
-			case "reason2":
-			  	value = "故障2"
-			    break;
-			case "reason3":
-			  	value = "故障3"
-			    break;
-			case "reason4":
-			  	value = "故障4"
-			    break;
-			default:
-			    value = "";
-			    break;
-			}
-		return value;
-	}
+	
 })

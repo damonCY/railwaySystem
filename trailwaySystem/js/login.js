@@ -2,11 +2,13 @@ tool.plusReady(function(){
 
 	var user = tool.getItem("user");
 	if(user.phone){
-		$('#phone').val(phone);
+		$('#phone').val(user.phone);
 	}
 	window.addEventListener("refreshphone",function(e){
+		console.log("fire")
 		var phoneNumber = e.detail.data;
-		$('#phone').val(phone);
+		console.log("this---"+phoneNumber)
+		$('#phone').val(phoneNumber);
 	})
 //	tool.removeItem("user");//删除本地数据，重新更新
 	function getForm(){
@@ -29,13 +31,14 @@ tool.plusReady(function(){
 					mui.toast("sucess");
 					tool.setItem("user",data.data);
 //					console.log("login "+JSON.stringify(data.data))
+					var index = plus.runtime.appid;
 					var index =  plus.webview.getLaunchWebview();
 					index.reload();
 					mui.back();
 				}
 			},
 			error: function(err){
-				console.log("err "+JSON.stringify(err));
+				mui.toast("err "+JSON.stringify(err));
 			}
 		})
 		
@@ -46,5 +49,8 @@ tool.plusReady(function(){
 		var cleartime = setTimeout(function(){
 			getForm();
 		},500)
+	})
+	$('#register').on('click',function(){
+		tool.open({url: "./register.html"});
 	})
 })
