@@ -220,8 +220,16 @@
 			tool.open({url: url});
 		})
 		$('.personal').on('click',function(){
-			var url = $(this).attr('data-url');
-			tool.open({url: url});
+			var urls = $(this).attr('data-url');
+			if(urls==="./pages/emergency.html"){
+				var pages = plus.webview.all();
+				for (var i = 0, len = pages.length; i < len; i++) {
+					if((pages[i]["id"].indexOf("solving")>0)|| pages[i]["id"].indexOf('emergency.html')>0){
+						pages[i].close(); //关闭缓存数据
+					}
+				}
+			}
+			tool.open({url: urls});
 		})
 	})
 </script>

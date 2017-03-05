@@ -36,7 +36,7 @@ var tool = {
 		return localStorage.clear();
 	},
 	open: function(params){
-		return mui.openWindow({"url": params.url,"id":params.url,"extras": params.data,
+		return mui.openWindow({"url": params.url,"id":params.url,"extras": params.extras,
 			show:{
 		      autoShow:true,//页面loaded事件发生后自动显示，默认为true
 		      aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；

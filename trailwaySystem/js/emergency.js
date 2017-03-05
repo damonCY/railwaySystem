@@ -5,12 +5,13 @@ tool.ready(function(){
 		userType: user.userType,
 		phone: user.phone,
 		role: user.role,
-		id: user.id
+		id: user.id,
+		etag: "123"
 	};//上传参数
 	
 	//获取一个创建id
 	tool.getEtag(function(data){
-		console.log("newetag "+data.data.etag);
+//		console.log("newetag "+data.data.etag);
 		params.etag = data.data.etag;
 	})
 	
@@ -27,9 +28,11 @@ tool.ready(function(){
 		reason();
 	})
 	$('#cancel').on('tap',function(){
-		var currentPage = plus.webview.currentWebview();
-		currentPage.reload();
-		mui.toast("已重置")
+//		var currentPage = plus.webview.currentWebview();
+//		currentPage.reload();
+//		mui.toast("已重置")
+		var etag = params.etag;
+		tool.open({url: "./solving.html",extras:{"etag": etag}})
 	})
 	function uploadNotice(params){
 		params.positions = $("#positions").val().trim();

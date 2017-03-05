@@ -292,7 +292,9 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css"
 				],
-				"refer": [],
+				"refer": [
+					"pages/solving.html"
+				],
 				"priority": 0
 			},
 			"pages/mainsub.html": {
@@ -340,6 +342,71 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"pages/login.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/solving.html": {
+				"resources": [
+					"js/template.js",
+					"js/tool.js",
+					"js/jquery.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/header.css"
+				],
+				"refer": [
+					"pages/solving_two.html"
+				],
+				"priority": 0
+			},
+			"pages/solving_two.html": {
+				"resources": [
+					"js/tool.js",
+					"js/jquery.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/template.js",
+					"css/header.css"
+				],
+				"refer": [
+					"pages/solving_three.html"
+				],
+				"priority": 0
+			},
+			"pages/solving_three.html": {
+				"resources": [
+					"js/tool.js",
+					"js/jquery.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/template.js",
+					"css/header.css"
+				],
+				"refer": [
+					"pages/solving_four.html"
+				],
+				"priority": 0
+			},
+			"pages/solving_four.html": {
+				"resources": [],
+				"refer": [
+					"pages/solving_five.html"
+				],
+				"priority": 0
+			},
+			"pages/solving_five.html": {
+				"resources": [
+					"js/tool.js",
+					"js/jquery.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/template.js",
+					"css/header.css"
 				],
 				"refer": [],
 				"priority": 0

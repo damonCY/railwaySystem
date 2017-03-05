@@ -38,6 +38,15 @@ var mongoose = require('./db.js'),
 		reason: {type: String},
 	});
 
+	var solvingListSchema = new Schema({
+		name: { type: String},
+		userType: {type: String},
+		phone: {type: String},
+		id: {type: String},
+		time: {type: String},
+		etag: {type: String},
+		solvingList: {type: String},
+	})
 
 
 module.exports = {
@@ -45,4 +54,5 @@ module.exports = {
 		merge: mongoose.model('Merge',mergeSchema),
 		personal: mongoose.model('personal',personalSchema),
 		noticeList: mongoose.model('noticeList',noticeListSchema),
+		solvingList: mongoose.model('solvingList',solvingListSchema),
 }

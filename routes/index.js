@@ -147,4 +147,25 @@ module.exports = function(app){
 		})
 	})
 
+	//solving 操作记录
+	app.post("/solvingList", function(req,res){
+		var body = req.body;
+		var obj = {};
+				obj.etag = body.etag;
+				obj.phone = body.phone;
+				obj.id = body.id;
+				obj.time =body.time;
+				obj.name = body.name;
+				obj.userType = body.userType;
+				obj.solvingList = body.solvingList;
+		mTool.insert(schemas.solvingList,obj, 
+			function(err,data){
+				console.log('insert')
+			if(err){
+				res.send(err)
+			}else{
+				res.send({"status": 1,"data": data});
+			}
+		});
+	})
 }

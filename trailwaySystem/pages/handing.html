@@ -8,20 +8,41 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
 		<style>
-			.nav{
-				
+			.mui-content{
+				margin:0 20px;
+			}
+			.table{
+				margin-top: 50px;;
+				width: 100%;
+				color: #666;
+				border: 1px solid #bbb;
 			}
 		</style>
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">处置操作记录</h1>
+			<h1 class="mui-title">待处理</h1>
 		</header>
 		<div class="mui-content">
-			<div class="nav">
-				
-			</div>
+			<table border="1" class="table">
+				<tr>
+					<th>操作人员</th>
+					<th>处理命令</th>
+					<th>职位</th>
+					<th>属性</th>
+					<th>时间</th>
+				</tr>
+				<tbody class="">
+					<tr>
+						<td>sun</td>
+						<td>打开阀门</td>
+						<td>管理员</td>
+						<td>属性</td>
+						<td>20170213</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</body>
 <script src="../js/mui.min.js"></script>
