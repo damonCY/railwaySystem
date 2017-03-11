@@ -74,12 +74,15 @@
 <script src="../js/tool.js"></script>
 <script>
 	tool.plusReady(function(){
-		var page  = tool.openInfo();
-		
+		var page  = tool.openInfo();		
 		var extras = {
 			etag: page.etag,
+			positions: page.positions,
+			trainNumber: page.trainNumber,
+			reason: page.reason,
 			solving_list: []
 		}
+//		console.log("extras---"+JSON.stringify(extras))
 		var methods = [
 			 {
 				maxTime: 180, 

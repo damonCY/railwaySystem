@@ -45,7 +45,10 @@ var mongoose = require('./db.js'),
 		id: {type: String},
 		time: {type: String},
 		etag: {type: String},
-		solvingList: {type: String},
+		positions: {type: String},
+		reason: {type: String},
+		trainNumber: {type: String},
+		solvingList:{type: Array},
 	})
 
 

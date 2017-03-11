@@ -79,11 +79,17 @@
 		console.log(JSON.stringify(page))
 		var extras = {
 			etag: page.etag,
+			positions: page.positions,
+			trainNumber: page.trainNumber,
+			reason: page.reason,
 			solving_list: page.solving_list
 		}
 		var time = tool.getTime();
 		var params = {
 				etag: page.etag,
+				positions: page.positions,
+				trainNumber: page.trainNumber,
+				reason: page.reason,
 				phone: user.phone,
 				id: user.id,
 				time: time,
@@ -147,7 +153,7 @@
 		
 		function update(){
 			params.solvingList = JSON.stringify(extras.solving_list);
-				console.log(JSON.stringify(params.solvingList));
+				console.log("five----"+JSON.stringify(params));
 			$.ajax({
 				url: tool.schema + "/solvingList",
 				type:"POST",
@@ -158,6 +164,12 @@
 						falg = false;
 						var index = plus.runtime.appid;
 						plus.webview.show( index ); 
+						var pages = plus.webview.all();
+						for (var i = 0, len = pages.length; i < len; i++) {
+							if((pages[i]["id"].indexOf("solving")>0)&&!(pages[i]["id"].indexOf("five")>0)|| pages[i]["id"].indexOf('emergency.html')>0){
+								pages[i].close(); //关闭缓存数据
+							}
+						}
 						mui.toast("上报成功");
 					}else{
 						mui.toast("上报失败，请重新上报");

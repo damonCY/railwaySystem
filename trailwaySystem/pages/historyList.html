@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<style>
+			html,body{
+				height: 100%;
+			}
+			.container{
+				display: flex;
+				display: -webkit-flex;
+				flex-direction: column;
+			}
+			.nav{
+				display: flex;
+				display: -webkit-flex;
+				justify-content: space-around;
+				align-items: center;
+				height: 60px;
+				justify-content: space-around;
+				border-bottom: 1px solid #bbb;
+			}
+			.nav span{
+				display: block;
+				color: #000;
+				
+			}
+			.list{
+				list-style: none;
+				flex: 1;
+				overflow-y: auto;
+			}
+			.item_content{
+				display: flex;
+				justify-content: space-around;
+			}
+			.mui-content{
+				flex: 1;
+				background-color: red;
+			}
+			.item_detail{
+				max-width: 200px;
+				text-overflow: hidden;
+				background-color: yellow;
+			}
+			.item_content td{
+				padding: 10px;
+			}
+			.list tr:nth-child(2n){
+				background-color: #BBBBBB;
+			}
+		</style>
+	</head>
+	<body style="display: flex;">
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">处置操作记录</h1>
+		</header>
+		
+		<div class="mui-content">
+			<div class="nav">
+				<span>操作人</span>
+				<span>处置命令</span>
+				<span>职业</span>
+				<span>属性</span>
+				<span>时间</span>
+			</div>
+	    	<table class="list" id="list"></table>
+		</div>
+	</body>
+	<script id="template" type="text/html">
+		{{each list as item}}
+		<tr class="item_content" data-etag={{item.etag}}>
+			<td>{{item.name}}</td>
+			<td>{{item.solvingList[0].ways[0]}}</td>
+			<td>{{item.userType}}</td>
+			<td>{{item.solvingList[0].ways[0]}}</td>
+			<td>{{item.time}}</td> 
+		</tr>
+		{{/each}}
+	</script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/tool.js"></script>
+<script src="../js/template.js"></script>
+<script>
+	tool.plusReady(function(){
+		
+		init();
+		function init(){
+			$.ajax({
+				url: tool.schema+"/historyList",
+				type: "get",
+				success: function(data){
+					if(data.status=="success"){
+						console.log(list)
+					var html = template('template',data);
+					document.getElementById('list').innerHTML = html;
+					}
+				},
+				error: function(err){
+					console.log("err") 
+				}
+			})
+		}
+		
+		$('.list').on('tap','tr',function(){
+			var data = $(this).attr("data-etag");
+			tool.open({url: "./detail.html",extras: {etag: data}}); 
+			
+		})
+	})
+</script>
+</html>

@@ -151,13 +151,16 @@ module.exports = function(app){
 	app.post("/solvingList", function(req,res){
 		var body = req.body;
 		var obj = {};
-				obj.etag = body.etag;
-				obj.phone = body.phone;
-				obj.id = body.id;
-				obj.time =body.time;
-				obj.name = body.name;
-				obj.userType = body.userType;
-				obj.solvingList = body.solvingList;
+			obj.etag = body.etag;
+			obj.phone = body.phone;
+			obj.id = body.id;
+			obj.time =body.time;
+			obj.name = body.name;
+			obj.positions = body.positions;
+			obj.reason = body.reason;
+			obj.trainNumber = body.trainNumber;
+			obj.userType = body.userType;
+			obj.solvingList = JSON.parse(body.solvingList);
 		mTool.insert(schemas.solvingList,obj, 
 			function(err,data){
 				console.log('insert')
@@ -167,5 +170,29 @@ module.exports = function(app){
 				res.send({"status": 1,"data": data});
 			}
 		});
+	})
+
+	//历史查询
+	app.get("/historyList",function(req,res){
+
+		mTool.find(schemas.solvingList,{},function(err,data){
+			if(err){
+				console.log("/noticeList error"+ err)
+			}else{
+				res.send({list: data,status: "success"});
+			}
+		})
+	})
+
+	//历史记录详情查看
+	app.post("/historyList",function(req,res){
+		var etag = req.body.etag;
+		mTool.find(schemas.solvingList,{"etag": etag},function(err,data){
+			if(err){
+				console.log("/noticeList error"+ err)
+			}else{
+				res.send({list: data,status: "success"});
+			}
+		})
 	})
 }

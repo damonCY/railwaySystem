@@ -24,7 +24,8 @@
 			"register.html",
 			"pages/login.html",
 			"pages/personal.html",
-			"pages/emergency.html"
+			"pages/emergency.html",
+			"pages/historyList.html"
 		]
 	},
 	"pages/personal.html": {
@@ -193,6 +194,15 @@
 	"pages/solving_four.html": {
 		"refer": [
 			"pages/solving_five.html"
+		],
+		"resources": [
+			"js/tool.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/template.js",
+			"css/header.css"
 		]
 	},
 	"pages/solving_five.html": {
@@ -204,6 +214,32 @@
 			"css/mui.min.css",
 			"js/template.js",
 			"css/header.css"
+		]
+	},
+	"pages/historyList.html": {
+		"resources": [
+			"fonts/mui.ttf",
+			"js/template.js",
+			"css/header.css",
+			"js/tool.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"pages/solving_four.html",
+			"pages/detail.html"
+		]
+	},
+	"pages/detail.html": {
+		"resources": [
+			"js/tool.js",
+			"js/jquery.min.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/header.css",
+			"js/template.js"
 		]
 	}
 }

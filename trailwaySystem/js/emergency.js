@@ -28,11 +28,10 @@ tool.ready(function(){
 		reason();
 	})
 	$('#cancel').on('tap',function(){
-//		var currentPage = plus.webview.currentWebview();
-//		currentPage.reload();
-//		mui.toast("已重置")
-		var etag = params.etag;
-		tool.open({url: "./solving.html",extras:{"etag": etag}})
+		var currentPage = plus.webview.currentWebview();
+		currentPage.reload();
+		mui.toast("已重置")
+		
 	})
 	function uploadNotice(params){
 		params.positions = $("#positions").val().trim();
@@ -51,6 +50,8 @@ tool.ready(function(){
 //				console.log("ajax "+JSON.stringify(data))
 				if(data.status == 1){
 					mui.toast("上报成功");
+					var etag = params.etag;
+					tool.open({url: "./solving.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})
 				}else{
 					mui.toast("上报失败，请重新上报");
 				}

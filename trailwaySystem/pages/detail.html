@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<style>
+			html,body{
+				height: 100%;
+			}
+			.txt{
+				padding-left: 20px;
+				margin-bottom: 10px;
+			}
+			.title{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				color: #000;
+			}
+			.title_s{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				color: #666;
+				padding-left: 30px;
+			}
+			.title_s_d{
+				text-indent: 50px;
+			}
+			.mui-content{
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body style="display: flex;">
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">处置操作记录详情</h1>
+		</header>
+		
+		<div class="mui-content" id="content">
+			<!--<div class="title">人员资料</div>
+			<div class="txt">姓名：</div>
+			<div class="txt">职业：</div>
+			<div class="txt">电话：</div>
+			<div class="txt">时间：</div>
+			<div class="title">故障上报</div>
+			<div class="txt">位置：</div>
+			<div class="txt">车次：</div>
+			<div class="txt">故障部位：</div>
+			<div class="title">故障处理</div>
+			<div class="title_s">常规处理(是否超时：)：</div>
+			<div class="title_s_d">1</div>-->
+		</div>
+	</body>
+<script id="template" type="tex/html">
+	{{each list as item}}
+		<div class="title">人员资料</div>
+		<div class="txt">姓名：{{item.name}}</div>
+		<div class="txt">职业：{{item.userType}}</div>
+		<div class="txt">电话：{{item.phone}}</div>
+		<div class="txt">时间：{{item.time}}</div>
+		<div class="title">故障上报</div>
+		<div class="txt">位置：{{item.positions}}</div>
+		<div class="txt">车次：{{item.trainNumber}}</div>
+		<div class="txt">故障部位：{{item.reason}}</div>
+		<div class="title">故障处理</div>
+		{{each item.solvingList as value}}
+			{{each value.ways as detail}}
+				<div class="title_s_d">{{detail}}</div>
+			{{/each}}
+		{{/each}}
+	{{/each}}
+</script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/template.js"></script>
+<script src="../js/tool.js"></script>
+<script>
+	tool.plusReady(function(){
+		var page  = tool.openInfo();	
+		init();
+		function init(){
+			$.ajax({
+				url: tool.schema+"/historyList",
+				type: "POST",
+				data: {
+					etag: page.etag 
+				},
+				success: function(data){
+					if(data.status=="success"){
+//						console.log(JSON.stringify(data))
+					var html = template('template',data);
+					document.getElementById('content').innerHTML = html;
+					}
+				},
+				error: function(err){
+					console.log("err") 
+				}
+			})
+		}
+		
+		$('.list').on('tap','tr',function(){
+			var data = $(this).attr("data-etag");
+			
+		})
+	})
+</script>
+</html>
