@@ -25,20 +25,18 @@
 				justify-content: space-around;
 				border-bottom: 1px solid #bbb;
 			}
-			.nav span{
-				display: block;
+			.nav{
 				color: #000;
-				
 			}
 			.list{
 				list-style: none;
 				flex: 1;
 				overflow-y: auto;
 			}
-			.item_content{
+			/*.item_content{
 				display: flex;
 				justify-content: space-around;
-			}
+			}*/
 			.mui-content{
 				flex: 1;
 				background-color: red;
@@ -48,8 +46,16 @@
 				text-overflow: hidden;
 				background-color: yellow;
 			}
-			.item_content td{
-				padding: 10px;
+			table,tr{
+				width: 100%;
+
+			}
+			td,th{
+				padding-top: 10px;
+				padding-bottom: 10px;
+				text-align: center;
+				table-layout:fixed;
+				word-break:break-all;
 			}
 			.list tr:nth-child(2n){
 				background-color: #BBBBBB;
@@ -63,24 +69,29 @@
 		</header>
 		
 		<div class="mui-content">
-			<div class="nav">
-				<span>操作人</span>
-				<span>处置命令</span>
-				<span>职业</span>
-				<span>时间</span>
-			</div>
+			<table class="list">
+				<tr class="nav" style="height: auto;">
+					<th width="20%">操作人</th>
+					<th width="20%">处置命令</th>
+					<th width="30%">职业</th>
+					<th width="30%">时间</th>
+				</tr>
+			</table>
 	    	<table class="list" id="list"></table>
 		</div>
 	</body>
 	<script id="template" type="text/html">
-		{{each list as item}}
-		<tr class="item_content" data-etag={{item.etag}}>
-			<td>{{item.name}}</td>
-			<td>{{item.solvingList[0].ways[0]}}</td>
-			<td>{{item.userType}}</td>
-			<td>{{item.time}}</td> 
-		</tr>
-		{{/each}}
+		<tbody>
+			{{each list as item}}
+			<tr class="item_content" data-etag={{item.etag}}>
+				<td width="20%">{{item.name}}</td>
+				<td width="20%">{{item.solvingList[0].ways[0]}}</td>
+				<td width="30%">{{item.userType}}</td>
+				<td width="30%">{{item.time}}</td> 
+			</tr>
+			{{/each}}
+		</tbody>
+		
 	</script>
 <script src="../js/mui.min.js"></script>
 <script src="../js/jquery.min.js"></script>
@@ -95,12 +106,17 @@
 				url: tool.schema+"/historyList",
 				type: "get",
 				success: function(data){
+					console.log(JSON.stringify(data))
+					var getTime = tool.getTime;
 					if(data.status=="success"){
-						console.log(list)
+						data.list.forEach(function(value,index){
+							value.time = getTime(value.time);
+							console.log("time"+value.time)
+						})
 					var html = template('template',data);
 					document.getElementById('list').innerHTML = html;
-					}
-				},
+					} 
+				}, 
 				error: function(err){
 					console.log("err") 
 				}

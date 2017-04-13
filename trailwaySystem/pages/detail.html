@@ -92,6 +92,9 @@
 				success: function(data){
 					if(data.status=="success"){
 //						console.log(JSON.stringify(data))
+						data.list.forEach(function(value,index){
+							value.time = tool.getTime(value.time);
+						})
 					var html = template('template',data);
 					document.getElementById('content').innerHTML = html;
 					}

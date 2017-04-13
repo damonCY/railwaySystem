@@ -60,9 +60,7 @@ var tool = {
 			targetPage.close();
 		}
 	},
-//	schema: "http://sun4343lee.imwork.net",
-//	schema: "http://sun4343lee.top:4000",
-	schema: "http://10.232.35.16:4000",
+	schema: "http://192.168.191.1:4000",
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);
@@ -79,8 +77,13 @@ var tool = {
 			callback&&callback();
 		})
 	},
-	getTime: function(){
-		var time = new Date();
+	getTime: function(seconds){
+		console.log("------"+seconds)
+		if(time){
+			var time = new Date(seconds);
+		}else{
+			var time = new Date();
+		}
 		var YY = time.getFullYear();
 		var MM = time.getMonth()+1;
 		var dd = time.getDate();
@@ -88,6 +91,9 @@ var tool = {
 		var mm = time.getMinutes();
 		
 		return YY+"-"+MM+"-"+dd+" "+HH+":"+mm;
+	},
+	getCurrentTime: function(){
+		return new Date().getTime();
 	},
 	getEtag: function(callback){
 			$.ajax({

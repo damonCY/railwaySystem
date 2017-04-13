@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+	</head>
+	
+	<body style="display: flex;">
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">操作查询</h1>
+			<style>
+				
+				.mui-content{
+					width: 100%;
+				}
+				.lable{
+					width: 75px;
+					float: left;
+				}
+				.mui-table-view-cell{
+					line-height: 40px;
+				}
+				.content_input{
+					margin-left: 75px;
+					
+				}
+				.content_input input{
+					width: 100%;
+					margin: 0;
+					border: 0;
+				}
+				.content_input span{
+					margin-left: 15px;
+				}
+				body .footer .submit {
+				  height: 35px;
+				  line-height: 35px;
+				  text-align: center;
+				  color: #8f8f94;
+				  background: #ffff00;
+				}
+			</style>
+		</header>
+		
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="lable">姓名：</div>
+					<div class="content_input" id="name">
+						<input type="text"  placeholder="name" class="name">
+					</div>
+				</li>
+				<li class="mui-table-view-cell" id="userType"> 
+					<div class="lable">职业：</div>
+					<div class="content_input" >
+						<span class="userType">profession</span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="lable">电话：</div>
+					<div class="content_input" id="phone">
+						<input type="tel"  placeholder="phone" class="phone"/>
+					</div>
+				</li>
+				<li class="mui-table-view-cell" id="time">
+					<div class="lable">时间：</div>
+					<div class="content_input" >
+						<span class="time">time</span>
+					</div>
+				</li>
+			</ul>
+			<footer class="footer">
+				<div class="submit">查询</div>
+			</footer>
+		</div>
+	</body>
+	
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/tool.js"></script>
+<script src="../js/template.js"></script>
+<script>
+	tool.plusReady(function(){
+		$('#time').on('tap',function(){
+			pickDate();
+		})
+		$('#userType').on('tap',function(){
+			userType();
+		})
+		$('.submit').on('tap',function(){
+			query();
+		})
+		function query(){
+			
+			var name = $('.name').val();
+			var profession = $('.userType').text();
+			var phone = $('.phone').val();
+			var time = $('.time').text();
+			var params = {
+				name: name,
+				profession: profession,
+				phone: phone,
+				time: time
+			}
+			console.log("-------"+JSON.stringify(params));
+			$.ajax({
+				type:"POST",
+				url: tool.schema+"/historyQuery",
+				data: params,
+				success: function(data){
+					console.log("-------------"+data)
+				},	
+				error: function(){}
+			});
+		}
+		//time
+		function pickDate() {
+			var dDate=new Date();
+			plus.nativeUI.pickDate( function(e) {
+				var d=e.date;
+				var time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+				$(".time").text(time);
+			},function(e){
+				console.log( "未选择日期："+e.message );
+			});
+		}
+		
+		//userType
+		function userType(){
+			var bts=[{title:"主线司机台行调"},{title:"主线车站台行调"},{title:"复线"},{title:"管理层"}];
+			var type = 0;
+			plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
+				function(e){
+					type = e.index-1;
+					$(".userType").text(bts[type]["title"]);
+					tool.setItem('user',{"userType": bts[type]['title']});
+				}
+			)
+		}
+	})
+</script>
+</html>

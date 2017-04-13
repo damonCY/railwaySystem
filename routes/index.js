@@ -51,7 +51,6 @@ module.exports = function(app){
 	})
 
 	app.post('/login',function(req,res){
-
 		var phone = req.body.phone;
 		var password = req.body.password;
 		console.log(phone,password);
@@ -101,7 +100,6 @@ module.exports = function(app){
 		for(var key in req.body){
 			obj[key] = req.body[key];
 		}
-		console.log("getBody "+JSON.stringify(obj));
 		mTool.find(schemas.noticeList,{"id": id},function(err,data){//查询存在
 			var data = data[0] || {};
 			console.log('查询是否存在etag '+ JSON.stringify(data))
@@ -172,7 +170,7 @@ module.exports = function(app){
 		});
 	})
 
-	//历史查询
+	//历史记录
 	app.get("/historyList",function(req,res){
 
 		mTool.find(schemas.solvingList,{},function(err,data){
@@ -194,5 +192,11 @@ module.exports = function(app){
 				res.send({list: data,status: "success"});
 			}
 		})
+	})
+
+	//历史纪录查询
+	app.post('/historyQuery',function(req,res){
+		var body = req.body;
+		res.send(body);
 	})
 }

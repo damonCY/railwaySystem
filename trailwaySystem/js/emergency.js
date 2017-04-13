@@ -92,4 +92,11 @@ tool.ready(function(){
 		)
 	}
 	
+	var pages = plus.webview.all();
+	for (var i = 0, len = pages.length; i < len; i++) {
+		if(pages[i]["id"].indexOf("five")>0){
+			pages[i].close(); //关闭缓存数据
+		}
+	}
+	
 })

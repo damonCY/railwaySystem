@@ -12,10 +12,11 @@ tool.plusReady(function(){
 	})
 //	tool.removeItem("user");//删除本地数据，重新更新
 	function getForm(){
-		console.log("login")
+		console.log('123')
 		var phone = $('#phone').val();
 		var pwd = $('#pwd').val();
 		if(phone&&pwd){}else{mui.toast("请填写完整");return};
+		console.log("login")
 		$.ajax({
 			url: tool.schema+"/login",
 			type: "POST",
@@ -38,6 +39,7 @@ tool.plusReady(function(){
 				}
 			},
 			error: function(err){
+				console.log(33)
 				mui.toast("err "+JSON.stringify(err));
 			}
 		})
