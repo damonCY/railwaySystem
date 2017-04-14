@@ -197,6 +197,28 @@ module.exports = function(app){
 	//历史纪录查询
 	app.post('/historyQuery',function(req,res){
 		var body = req.body;
-		res.send(body);
+		var query = {};
+			var dayTime = parseInt(body.time) + 86400000; //一天
+			if(body.name){
+				query.name = name
+			}
+			if(body.time){
+				query.time = {$gt: parseInt(body.time)};
+			}
+
+			if(body.profession){
+				query.userType = body.profession;
+			}
+			if(body.phone){
+				query.phone = body.phone;
+			}
+			console.log("/historyQuery----"+JSON.stringify(query))
+			mTool.find(schemas.solvingList,query,function(err,data){
+				if(err){
+					console.log("/historyQuery error"+err)
+				}else{
+					res.send({list: data,status: "success"})
+				}
+			})
 	})
 }

@@ -60,7 +60,8 @@ var tool = {
 			targetPage.close();
 		}
 	},
-	schema: "http://192.168.191.1:4000",
+//	schema: "http://192.168.191.1:4000",//windows192.168.191.2
+	schema: "http://192.168.191.3:5000",//mac
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);
@@ -78,7 +79,7 @@ var tool = {
 		})
 	},
 	getTime: function(seconds){
-		console.log("------"+seconds)
+		
 		if(time){
 			var time = new Date(seconds);
 		}else{

@@ -33,10 +33,7 @@
 				flex: 1;
 				overflow-y: auto;
 			}
-			/*.item_content{
-				display: flex;
-				justify-content: space-around;
-			}*/
+			
 			.mui-content{
 				flex: 1;
 				background-color: red;
@@ -99,8 +96,22 @@
 <script src="../js/template.js"></script>
 <script>
 	tool.plusReady(function(){
-		
-		init();
+		var parentData = tool.openInfo();
+		if(parentData.list){
+			console.log("historyList---"+JSON.stringify(parentData.list));
+			var getTime = tool.getTime;
+				if(parentData.status=="success"){
+					parentData.list.forEach(function(value,index){
+						value.time = getTime(value.time);
+					})
+				var html = template('template',parentData);
+				document.getElementById('list').innerHTML = html;
+				} 
+		}else{
+			init();
+
+		}
+
 		function init(){
 			$.ajax({
 				url: tool.schema+"/historyList",
@@ -111,7 +122,6 @@
 					if(data.status=="success"){
 						data.list.forEach(function(value,index){
 							value.time = getTime(value.time);
-							console.log("time"+value.time)
 						})
 					var html = template('template',data);
 					document.getElementById('list').innerHTML = html;
@@ -126,7 +136,6 @@
 		$('.list').on('tap','tr',function(){
 			var data = $(this).attr("data-etag");
 			tool.open({url: "./detail.html",extras: {etag: data}}); 
-			
 		})
 	})
 </script>

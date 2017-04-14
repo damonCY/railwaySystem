@@ -100,7 +100,19 @@
 			var name = $('.name').val();
 			var profession = $('.userType').text();
 			var phone = $('.phone').val();
-			var time = $('.time').text();
+			var time = $('.time').attr("data-time");
+			if(name=="name"){
+				name=""
+			}
+			if(profession=="profession"){
+				profession=""
+			}
+			if(phone=="phone"){
+				phone=""
+			}
+			if(time=="time"){
+				time=""
+			}
 			var params = {
 				name: name,
 				profession: profession,
@@ -113,7 +125,8 @@
 				url: tool.schema+"/historyQuery",
 				data: params,
 				success: function(data){
-					console.log("-------------"+data)
+					console.log("-------------back"+JSON.stringify(data))
+					tool.open({"url":"../pages/historyList.html","extras": data});
 				},	
 				error: function(){}
 			});
@@ -123,8 +136,11 @@
 			var dDate=new Date();
 			plus.nativeUI.pickDate( function(e) {
 				var d=e.date;
+				
 				var time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-				$(".time").text(time);
+				console.log("time"+typeof time)
+				var seconds = (parseInt(d.getTime()/86400000))*86400000; 
+				$(".time").attr('data-time',seconds).text(time); //时间戳缓存，上传
 			},function(e){
 				console.log( "未选择日期："+e.message );
 			});
