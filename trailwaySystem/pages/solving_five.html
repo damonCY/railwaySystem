@@ -51,7 +51,7 @@
 		</header>
 		<div class="mui-content">
 			<div class="method_container" id="method_container"></div>
-			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="form">完成</button>
+			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="submit">完成</button>
 		</div>
 	</body>
 <script id="one" type="text/html">
@@ -111,7 +111,7 @@
 		}
 		var html = template('one',methods[0]);
 		document.getElementById('method_container').innerHTML = (html);
-		$('#form').on('click',function(){
+		$('#submit').on('click',function(){
 			check();
 		})
 
@@ -136,10 +136,8 @@
 		function check(){
 			$('input').each(function(){
 				if($(this).is(":checked")){
-					console.log($(this).attr('value'));
 					obj.ways.push($(this).attr('value'))
 				}
-				
 			})
 			if(obj.ways.length==0){
 				mui.toast("请选择一项");
@@ -153,7 +151,6 @@
 		
 		function update(){
 			params.solvingList = JSON.stringify(extras.solving_list);
-				console.log("five----"+JSON.stringify(params));
 			$.ajax({
 				url: tool.schema + "/solvingList",
 				type:"POST",

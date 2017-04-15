@@ -21,11 +21,12 @@ tool.plusReady(function(){
 				}
 			},
 			error: function(err){
-				console.log("err "+err);
+				console.log("err "+JSON.stringify(err));
 			}
 		})
 		
 	}
+	console.log(123)
 	$('.button').on('click',function(){
 		getForm()
 	})

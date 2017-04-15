@@ -116,7 +116,7 @@
 				</div>
 			</div>
 		</div>
-	 	<div class="list_content" id="one">
+	 	<div class="list_content" >
 	 		<div class='list_title'>
 	 			应急预案管理    
 	 		</div>
@@ -124,17 +124,17 @@
 	 			<div class="item">
 	 				预案数字化管理<span class="arrow_right"></span>
 	 			</div>
-	 			<div class="item ">
+	 			<div class="item " data-url="./pages/learning.html">
 	 				预案学习<span class="arrow_right"></span>
 	 			</div>
-	 			<div class="item ">
+	 			<div class="item " data-url="./pages/testing.html">
 	 				预案测试<span class="arrow_right"></span>
 	 			</div>
 	 		</div>
 	 	</div>
 	 	 	
-	 	<div class="list_content" id="one">
-	 		<div class='list_title'>
+	 	<div class="list_content" >
+	 		<div class='list_title' data-type="emergency">
 	 			应急处置  
 	 		</div>
 	 		<div class="item_content">
@@ -156,7 +156,7 @@
 	 		</div>
 	 	</div>
 	 	
-	 	<div class="list_content" id="one">
+	 	<div class="list_content">
 	 		<div class='list_title'>
 	 			故障处置记录查询    
 	 		</div>
@@ -174,67 +174,6 @@
 
 <script type="text/javascript" src="./js/jquery.min.js"></script>
 <script type="text/javascript" src="./js/tool.js"></script>
-<script>
-
-	tool.plusReady(function(){
-//		user = {
-//		    "_id": "5878b27aebd3ce74c4f58077",
-//		    "phone": 123,
-//		    "password": "11",
-//		    "id": "1484305018808",
-//		    "__v": 0,
-//		    "name": "damon12311",
-//		    "gender": "女",
-//		    "birthday": "2017-2-18",
-//		    "userType": "站台服务人员2",
-//		    "photo": "file:///storage/emulated/0/tencent/MicroMsg/WeiXin/wx_camera_1487182195698.jpg"
-//		}
-		var user = tool.getItem("user");
-			if(!user.password){
-				tool.open({url:"./pages/login.html"});
-				return;
-			}
-		init(user);
-		function init(user){
-			$('#userName').text(user.name);
-			$('#userType').text(user.userType);
-			$('#photo').attr('src',user.photo);
-		}
-		window.addEventListener("refreshPhoto",function(e){
-			var path = e.detail.data;
-			$('#photo').attr('src',path);
-		});
-		window.addEventListener('refreshName',function(e){
-			var data = JSON.parse(e.detail.data);
-			$('#userName').text(data.name);
-			$('#userType').text(data.userType);
-		})
-		$('.list_title').on('click',function(){
-			var this_ = $(this);
-			if(this_.hasClass('active_txt')){
-				this_.removeClass('active_txt')
-			}else{
-				this_.addClass('active_txt')
-			}
-			$(this).next('.item_content').toggle();
-		})
-		$('.list_content').on('click','.item',function(){
-			var url = $(this).attr('data-url');
-			tool.open({url: url});
-		})
-		$('.personal').on('click',function(){
-			var urls = $(this).attr('data-url');
-			if(urls==="./pages/emergency.html"){
-				var pages = plus.webview.all();
-				for (var i = 0, len = pages.length; i < len; i++) {
-					if((pages[i]["id"].indexOf("solving")>0)|| pages[i]["id"].indexOf('emergency.html')>0){
-						pages[i].close(); //关闭缓存数据
-					}
-				}
-			}
-			tool.open({url: urls});
-		})
-	})
-</script>
+<script src="./js/index.js"></script>
 </body>
 </html>

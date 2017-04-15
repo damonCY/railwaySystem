@@ -74,11 +74,14 @@
 					<th width="30%">时间</th>
 				</tr>
 			</table>
-	    	<table class="list" id="list"></table>
+	    	<table class="list" id="list">
+	    		
+	    	</table>
 		</div>
 	</body>
 	<script id="template" type="text/html">
 		<tbody>
+			{{if list.length>0}}
 			{{each list as item}}
 			<tr class="item_content" data-etag={{item.etag}}>
 				<td width="20%">{{item.name}}</td>
@@ -87,6 +90,9 @@
 				<td width="30%">{{item.time}}</td> 
 			</tr>
 			{{/each}}
+			{{else}}
+			<tr><td width="100%">暂无数据...</td></tr>
+			{{/if}}
 		</tbody>
 		
 	</script>
@@ -109,7 +115,6 @@
 				} 
 		}else{
 			init();
-
 		}
 
 		function init(){
@@ -117,11 +122,12 @@
 				url: tool.schema+"/historyList",
 				type: "get",
 				success: function(data){
-					console.log(JSON.stringify(data))
+
 					var getTime = tool.getTime;
 					if(data.status=="success"){
 						data.list.forEach(function(value,index){
-							value.time = getTime(value.time);
+							var seconds = value.time;
+							value.time = getTime(seconds);
 						})
 					var html = template('template',data);
 					document.getElementById('list').innerHTML = html;

@@ -1,4 +1,5 @@
-var tool = {
+(function(w){
+	tool = {
 	ready: function(callback){
 		mui.ready(function(){
 			callback&&callback()
@@ -61,7 +62,7 @@ var tool = {
 		}
 	},
 //	schema: "http://192.168.191.1:4000",//windows192.168.191.2
-	schema: "http://192.168.191.3:5000",//mac
+	schema: "http://125.81.58.216:5000",//mac
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);
@@ -79,8 +80,8 @@ var tool = {
 		})
 	},
 	getTime: function(seconds){
-		
-		if(time){
+		var seconds = parseInt(seconds);
+		if(seconds){
 			var time = new Date(seconds);
 		}else{
 			var time = new Date();
@@ -90,8 +91,12 @@ var tool = {
 		var dd = time.getDate();
 		var HH = time.getHours();
 		var mm = time.getMinutes();
-		
-		return YY+"-"+MM+"-"+dd+" "+HH+":"+mm;
+		if(seconds){
+			return MM + "-" + dd + " " + HH + ":"+ mm;
+		}else{
+			return YY + "-" + MM + "-" + dd + " " + HH + ":"+ mm;	
+		}
+
 	},
 	getCurrentTime: function(){
 		return new Date().getTime();
@@ -118,3 +123,5 @@ var tool = {
 		mui.fire(targetPage,eventName,{"data": data});
 	}
 }
+	w.tool;
+})(window)

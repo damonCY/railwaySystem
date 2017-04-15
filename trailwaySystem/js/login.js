@@ -31,11 +31,9 @@ tool.plusReady(function(){
 				}else{
 					mui.toast("sucess");
 					tool.setItem("user",data.data);
-//					console.log("login "+JSON.stringify(data.data))
-					var index = plus.runtime.appid;
 					var index =  plus.webview.getLaunchWebview();
 					index.reload();
-					mui.back();
+					plus.webview.show( index ); 
 				}
 			},
 			error: function(err){

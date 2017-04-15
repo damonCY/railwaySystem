@@ -108,7 +108,7 @@ function save(){
 	})
 }
 function userType(){
-	var bts=[{title:"主线司机台行调"},{title:"主线车站台行调"},{title:"复线"},{title:"管理层"}];
+	var bts=[{title:"主线司机台行调"},{title:"主线车站台行调"},{title:"辅线"},{title:"管理层"}];
 	var type = 0;
 	plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
 		function(e){

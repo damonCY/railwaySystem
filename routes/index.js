@@ -200,10 +200,10 @@ module.exports = function(app){
 		var query = {};
 			var dayTime = parseInt(body.time) + 86400000; //一天
 			if(body.name){
-				query.name = name
+				query.name = body.name;
 			}
 			if(body.time){
-				query.time = {$gt: parseInt(body.time)};
+				query.time = {$gt: parseInt(body.time),$lt: dayTime};
 			}
 
 			if(body.profession){

@@ -11,7 +11,6 @@ tool.ready(function(){
 	
 	//获取一个创建id
 	tool.getEtag(function(data){
-//		console.log("newetag "+data.data.etag);
 		params.etag = data.data.etag;
 	})
 	

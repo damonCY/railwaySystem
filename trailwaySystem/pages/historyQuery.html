@@ -100,7 +100,7 @@
 			var name = $('.name').val();
 			var profession = $('.userType').text();
 			var phone = $('.phone').val();
-			var time = $('.time').attr("data-time");
+			var time = $('.time').attr("data-time") ||"";
 			if(name=="name"){
 				name=""
 			}
@@ -119,7 +119,7 @@
 				phone: phone,
 				time: time
 			}
-			console.log("-------"+JSON.stringify(params));
+			console.log("-------params---"+JSON.stringify(params));
 			$.ajax({
 				type:"POST",
 				url: tool.schema+"/historyQuery",
@@ -136,10 +136,9 @@
 			var dDate=new Date();
 			plus.nativeUI.pickDate( function(e) {
 				var d=e.date;
-				
 				var time = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
-				console.log("time"+typeof time)
-				var seconds = (parseInt(d.getTime()/86400000))*86400000; 
+				var seconds = (parseInt(d.getTime()/86400000))*86400000-28800000; //减去8800000 相差八个小时
+				console.log("getTime-----"+seconds)
 				$(".time").attr('data-time',seconds).text(time); //时间戳缓存，上传
 			},function(e){
 				console.log( "未选择日期："+e.message );
@@ -150,8 +149,7 @@
 		function userType(){
 			var bts=[{title:"主线司机台行调"},{title:"主线车站台行调"},{title:"复线"},{title:"管理层"}];
 			var type = 0;
-			plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
-				function(e){
+			plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},function(e){
 					type = e.index-1;
 					$(".userType").text(bts[type]["title"]);
 					tool.setItem('user',{"userType": bts[type]['title']});
