@@ -50,7 +50,17 @@ tool.ready(function(){
 				if(data.status == 1){
 					mui.toast("上报成功");
 					var etag = params.etag;
-					tool.open({url: "./solving.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})
+//					alert(params.userType)
+					if(params.userType=="主线司机台行调"){
+						tool.open({url: "./solving.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})	
+					}else if(params.userType=="主线车站台行调"){
+						tool.open({url: "./solvingStation.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})	
+						
+					}else if(params.userType=="辅线"){
+						tool.open({url: "./solvingauxiliary.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})	
+						
+					}
+
 				}else{
 					mui.toast("上报失败，请重新上报");
 				}
@@ -70,16 +80,7 @@ tool.ready(function(){
 			}
 		)
 	}
-	
-//	function trainNumber(){
-//		var bts=[{title:"车次1"},{title:"车次2"},{title:"车次3"},{title:"车次4"}];
-//		plus.nativeUI.actionSheet({cancel:"取消",buttons:bts},
-//			function(e){
-//				var index = e.index -1;
-//				$("#train").removeAttr('readonly').val(bts[index]['title']);
-//			}
-//		)
-//	}
+
 	
 	function reason(){
 		var bts=[{title:"列车失电"},{title:"列车轮对固死"},{title:"车辆屏无故障显示"},{title:"发出报警声"}];

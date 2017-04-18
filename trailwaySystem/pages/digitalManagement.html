@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<style>
+			.content .label{
+				float: left;
+				font-size: 15px;
+				line-height: 45px;
+			}
+			.button{
+				border: 0px;
+				margin-right: 15px;
+			}
+			.active{
+				background-color: #BBBBBB;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">预案数字化管理</h1>
+		</header>
+		<div class="mui-content content ">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" data-time="one">
+					<div class="label">故障发生三分钟内</div>
+				</li>
+				<li class="mui-table-view-cell"  data-time="two">
+					<div class="label">故障发生三到五分钟内</div>
+				</li>
+				<li class="mui-table-view-cell"  data-time="three">
+					<div class="label">故障发生五到七分钟内</div>
+				</li>
+				<li class="mui-table-view-cell"  data-time="four">
+					<div class="label">故障发生七到十二分钟内</div>
+				</li>
+				<li class="mui-table-view-cell"  data-time="five">
+					<div class="label">故障发生十三分钟</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/template.js"></script>
+<script src="../js/tool.js"></script>
+<script type="text/html" id="template">
+	{{each item in list}}
+	<li class="mui-table-view-cell" data-info={{item.info}}>
+		<div class="label">{{item.title}}</div>
+	</li>
+	{{/each}}
+</script>
+<script type="text/javascript">
+	tool.ready(function(){
+		$('.mui-table-view-cell').on('tap',function(){
+//			closePage()
+			var className = $(this).attr('data-time');
+			if(!$(this).hasClass('active')){
+				$('.active').removeClass('active');
+				$(this).addClass('active');
+			}
+			console.log('digital-manageMent'+className)
+
+			tool.open({"url":"../pages/digitalDetail.html","extras":{className: className}});
+		})
+		function closePage(){
+			var pages = plus.webview.all();
+			for (var i = 0, len = pages.length; i < len; i++) {
+				if(pages[i]["id"].indexOf("digitalDetail")>0){  //关闭 digitalDetail 缓存页面
+					pages[i].close(); //关闭缓存数据
+				}
+			}
+		}
+	})
+</script>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<style>
+			html,body{
+				height: 100%;
+			}
+			.txt{
+				padding-left: 20px;
+				margin-bottom: 10px;
+			}
+			.title{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				color: #000;
+			}
+			.title_s{
+				margin-top: 20px;
+				margin-bottom: 20px;
+				color: #666;
+				padding-left: 30px;
+			}
+			.title_s_d{
+				text-indent: 50px;
+			}
+			.mui-content{
+				padding: 10px;
+			}
+			.content{
+				display: none;
+			}
+			.show{
+				display: block;
+			}
+		</style>
+	</head>
+	<body style="display: flex;">
+		<header class="mui-bar mui-bar-nav header">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">处置方案</h1>
+		</header>
+		
+		<div class="mui-content" >
+			<div class="one content">
+				<div class="title">主线：</div>
+				<p>司机台行调：1、设置扣车；2、控制发车间隔</p>
+				<p>车站台行调：1、通知检修调度；2、通知备用车司机上线</p>
+				<div class="title">辅线：</div>
+				<p>1、通知前方列车多停；2、车辆故障处理指南：1）检查设备柜微动开关，跳闸则复位，重新激活列车本站/下一站清客退出服务；2）无效则启动列车紧急激活程序，重新升弓合高断，否则请求救援。；3、信息调度按流程通报信息，信息模板：（时间）分（）号线（车次）次（列车号）司机(司机编号)在（）站（上行/下行线）报，（列车号）列车110V失电。OCC指令其继续处理。</p>
+			</div>
+			
+			<div class="two content">
+				<div class="title">主线：</div>
+				<p>司机台行调：1、询问司机故障处理情况； </p>
+				<p>车站台行调：1、提醒轮值技术人员提供技术支援；2、令相关车站做好清客准备</p>
+				<div class="title">辅线：</div>
+				<p>1、向车站发布列车延误信息；2、扣停后续相关列车，避免在区间迫停。</p>
+			</div>
+			<div class="three content">
+				<div class="title">主线：</div>
+				<p>司机台行调：1、令救援列车清客后准备救援；2、令故障列车清客； 3、查看救援方案：令后续列车担当救援列车。将故障车推进到罗湖III道存放。行调可组织救援车切除ATP，以35km/h的速度推进运行至存车地点。合理安排上行列车经存车线执行小交路。利用备用车调整列车间隔。适当控制发车间隔。</p>
+				<p>车站台行调：1、令相关车站协助救援列车清客； 2、令相关协助故障车清客；</p>
+				<div class="title">辅线：</div>
+				<p>1、信息调度按流程通报信息，信息模板：（时间）分（）号线（车次）次（列车号）司机(司机编号)在（）站（上行/下行线）报，列车仍无法激活。OCC指令其立即清客。</p>
+			</div>
+			<div class="four content">
+				<div class="title">主线：</div>
+				<p>司机台行调：1、 令故障车司机做好救援准备，命令模板：列车号）车立即执行客车救援程序，救援列车从老街方向开来，行调×××。2、向救援列车发令，命令模板：（列车号）车在（）站（上行/下行线）发生故障，OVER。（车次）次改开（车次）次URM限速35km/h将故障车推进至罗湖III道存放，行调×××。</p>
+				<p>车站台行调：1、向车站下达救援命令和行车调整指令；3、查看救援方案：令后续列车担当救援列车。将故障车推进到罗湖III道存放。行调可组织救援车切除ATP，以35km/h的速度推进运行至存车地点。合理安排上行列车经存车线执行小交路。利用备用车调整列车间隔。适当控制发车间隔。</p>
+				<div class="title">辅线：</div>
+				<p>1、准备救援进路；2、向全线车站发布列车延误及列车救援信息；3、信息调度按流程通报信息，信息模板（时间）分（）号线（车次）次（列车号）司机(司机编号)再次报,经处理仍然无法激活列车。OCC立即启动列车救援程序,计划将其推进至罗湖III道存放。4、利用备用车填补列车间隔，组织上行列车经存车线折返填补下行列车间隔。</p>
+			</div>
+			<div class="five content">
+				<div class="title">主线：</div>
+				<p>1、救援列车与故障车连挂完毕，同意救援列车动车。2、故障列车到达后罗湖III道后组织救援列车退行，命令模板：（改开车次）次原端退行，听行调指令停车，停车后恢复ATC,行调×××。</p>
+				<div class="title">辅线：</div>
+				<p>1、利用备用车填补列车间隔。2、故障处置完毕后信息调度按流程通报信息，信息模板：（时间）分1号线（列车号）故障列车已到达罗湖III道，OCC正组织受影响列车恢复正常运营.故障造成列车最大延误约XX分钟/最大间隔约XX分钟。3、电子单锁P20102/P20108道岔，指令列车原端退行。</p>
+			</div>
+		</div>
+	</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/tool.js"></script>
+<script>
+	tool.ready(function(){
+		var className = tool.openInfo().className;
+		console.log('digital----'+JSON.stringify(className))
+		if(!$("."+className).hasClass('show')){
+			$('.show').removeClass('show');
+			$("."+className).addClass('show');
+		}
+	})
+</script>
+</html>

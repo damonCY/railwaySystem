@@ -62,7 +62,7 @@
 		}
 	},
 //	schema: "http://192.168.191.1:4000",//windows192.168.191.2
-	schema: "http://125.81.58.216:5000",//mac
+	schema: "http://125.81.58.250:5000",//mac
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);

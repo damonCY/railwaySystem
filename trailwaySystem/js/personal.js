@@ -36,7 +36,7 @@ tool.ready(function(){
 			"inputValue": value ,
 			"type": "name"
 		}
-		tool.open({"url":"../pages/personedit.html","data":data});
+		tool.open({"url":"../pages/personedit.html","extras":data});
 	})
 	$('.userType').on('tap',function(){
 		userType();
