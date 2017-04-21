@@ -68,9 +68,11 @@
 		<div class="txt">故障部位：{{item.reason}}</div>
 		<div class="title">故障处理</div>
 		{{each item.solvingList as value}}
+			<p> {{value.startTime}} [{{value.name}}] {{value.userType}}
 			{{each value.ways as detail}}
-				<div class="title_s_d">{{detail}}</div>
+				{{detail}}
 			{{/each}}
+			</p>
 		{{/each}}
 	{{/each}}
 </script>
@@ -87,13 +89,12 @@
 				url: tool.schema+"/historyList",
 				type: "POST",
 				data: {
-					etag: page.etag 
+					id: page.infoId 
 				},
 				success: function(data){
-					if(data.status=="success"){
-//						console.log(JSON.stringify(data))
+					if(data.status=="1"){
 						data.list.forEach(function(value,index){
-							value.time = tool.getTime(value.time);
+							value.solvingList = parse(value.solvingList)
 						})
 					var html = template('template',data);
 					document.getElementById('content').innerHTML = html;
@@ -104,7 +105,15 @@
 				}
 			})
 		}
-		
+		function parse(arr){
+			var newArr = [];
+			if(arr.length>0){
+				for(var i=0;i<arr.length;i++){
+					newArr.push(JSON.parse(arr[i]));
+				}
+			}
+			return newArr;
+		}
 		$('.list').on('tap','tr',function(){
 			var data = $(this).attr("data-etag");
 			

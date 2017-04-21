@@ -33,6 +33,31 @@
 				border: 0px;
 				margin-right: 15px;
 			}
+			.hidden{
+				display: none;
+			}
+			.show{
+				display: block;
+			}
+			.item_detail{
+				max-width: 200px;
+				text-overflow: hidden;
+				background-color: yellow;
+			}
+			table,tr{
+				width: 100%;
+
+			}
+			td,th{
+				padding-top: 10px;
+				padding-bottom: 10px;
+				text-align: center;
+				table-layout:fixed;
+				word-break:break-all;
+			}
+			.list tr:nth-child(2n){
+				background-color: #BBBBBB;
+			}
 		</style>
 	</head>
 
@@ -41,7 +66,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">接警</h1>
 		</header>
-		<div class="mui-content content ">
+		<div class="mui-content content hidden" id="edit_container">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<div class="label">位置</div>
@@ -66,9 +91,30 @@
 			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="form">确定</button>
 			<button type="button" class="mui-btn mui-pull-right" style="margin-right: 15px;" id="cancel">取消</button>
 		</div>
+		<div class="emergencyList mui-content" id="template_container">
+			<table class="list" id="list"></table>
+		</div>
 	</body>
+<script id="template" type="text/html">
+	<tbody>
+		{{if list.length>0}}
+		{{each list as item}}
+		<tr class="item_content" data-trainNumber={{item.trainNumber}}>
+			<td width="20%">{{item.name}}</td>
+			<td width="20%">{{item.reason}}</td>
+			<td width="30%">{{item.userType}}</td>
+			<td width="30%">{{item.time}}</td> 
+		</tr>
+		{{/each}}
+		{{else}}
+		<tr><td width="100%">暂无数据...</td></tr>
+		{{/if}}
+	</tbody>
+	
+</script>
 <script src="../js/mui.min.js"></script>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/template.js"></script>
 <script src="../js/tool.js"></script>
 <script src="../js/emergency.js"></script>
 </html>

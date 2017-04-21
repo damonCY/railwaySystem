@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
+		<link rel="stylesheet" href="../css/solvingList.css" />
 		<style>
 			.mui-content{
 				margin:0 20px;
@@ -53,6 +54,40 @@
 			<div class="method_container" id="method_container"></div>
 			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="form">下一步</button>
 		</div>
+		
+		<div class="realtime_container">
+			
+			<div class="item_content">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">操作记录</a>
+			            <div class="mui-collapse-content" id="solvingTemplate">
+			                <h4>暂无消息...</h4>
+			            </div>
+			        </li>
+			    </ul>
+			</div>
+			
+			<div class="item_content">
+				<div class="realTime_title">
+					<span class="mui-pull-left">实时消息</span>
+				</div>
+				<div class="send_info">
+					<input type="text" placeholder="点击输入发送的指令或消息" class="input_info"/>
+				</div>
+				<div class="send_button">
+					<button type="button" class="mui-btn mui-btn-primary send_bt" id="sendInfo">发送</button>
+				</div>
+			</div>
+			<div class="item_content">
+				<div class="realTime_title">
+					<span class="mui-pull-left">实时消息记录</span>
+				</div>
+				<div class="record_template" id="recordsTemplate">
+					<h4>暂无消息...</h4>
+				</div>
+			</div>
+		</div>
 	</body>
 <script id="one" type="text/html">
 	<div class="progress_content">
@@ -74,14 +109,13 @@
 <script src="../js/tool.js"></script>
 <script>
 	tool.plusReady(function(){
-		var page  = tool.openInfo();
-//		console.log(JSON.stringify(page))
+		var page = tool.openInfo();
 		var extras = {
-			etag: page.etag,
-			positions: page.positions,
 			trainNumber: page.trainNumber,
-			reason: page.reason,
-			solving_list: page.solving_list
+			userType: page.userType,
+			name: page.name,
+			methods: "",
+			detail: "detail"
 		}
 		var methods = [
 			 {
@@ -94,6 +128,10 @@
 		var clear;
 		var obj = {
 			ways:[],
+			startTime: tool.getTime('',"hh:mm:s"),
+			userType: page.userType,
+			name: page.name,
+			endTime: "",
 			overTime: false
 		}
 		var html = template('one',methods[0]);
@@ -129,10 +167,39 @@
 				mui.toast("请选择一项");
 				return 
 			}
-			extras.solving_list.push(obj); 
-			tool.open({url: "./station_four.html",extras: extras}); 
+			obj.endTime = tool.getTime('',"hh:mm:s");
+			extras.methods = JSON.stringify(obj);
+			$.ajax({
+				url: tool.schema + "/notice/upload",
+				type:"POST",
+				dataType: "JSON",
+				data: extras,
+				success: function(data){
+					console.log("auxi---back--3"+JSON.stringify(data));
+					if(data.status==1){
+						tool.open({url: "./auxiliary_four.html",extras: extras});
+					}
+				},
+			})
 		}
 	})
 </script>
 <script src="../js/template.js"></script>
+
+<script id="records" type="text/html">
+	{{each recordsList as item}}
+		<p>{{item.sendTime}} [{{item.name}}] {{item.userType}} {{item.info}}</p>
+	{{/each}}
+</script>
+<script id="solvingList" type="text/html">
+	{{each solvingList as item}}
+		<p>
+			{{item.startTime}} [{{item.name}}] {{item.userType}} 
+			{{each item.ways as value}}
+				{{value}}
+			{{/each}}
+		</p>
+	{{/each}}
+</script>
+<script src="../js/solvingInfo.js"></script>
 </html>

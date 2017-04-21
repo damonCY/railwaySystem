@@ -6,13 +6,12 @@ tool.ready(function(){
 		phone: user.phone,
 		role: user.role,
 		id: user.id,
-		etag: "123"
 	};//上传参数
 	
 	//获取一个创建id
-	tool.getEtag(function(data){
-		params.etag = data.data.etag;
-	})
+//	tool.getEtag(function(data){
+//		params.etag = data.data.etag;
+//	})
 	
 	$('#form').on('tap',function(){
 		uploadNotice(params);
@@ -32,6 +31,36 @@ tool.ready(function(){
 		mui.toast("已重置")
 		
 	})
+	$('.list').on('tap','tr',function(){
+		var data = $(this).attr("data-trainNumber");
+		params.trainNumber =  data;
+		pageShow(params);
+	})
+	init();
+	function init(){  //初始化数据 是否有人已经接警
+		$.ajax({
+			url: tool.schema+"/historyList",
+			type: "POST",
+			success: function(data){
+				var getTime = tool.getTime;
+				if(data.status=="1"){
+					if(data.list.length>0){
+						console.log("---init---2")
+						$('#template_container').removeClass('hidden');
+						var html = template('template',data);
+						document.getElementById('list').innerHTML = html;
+					}else{
+						$('#edit_container').addClass('show');
+					}
+					
+				} 
+			}, 
+			error: function(err){
+				console.log("err") 
+			}
+		})
+	}
+	
 	function uploadNotice(params){
 		params.positions = $("#positions").val().trim();
 		params.trainNumber = $("#train").val().trim();
@@ -40,7 +69,7 @@ tool.ready(function(){
 			mui.toast("请填写完整再上传");return;
 		}
 		params.time = tool.getTime();
-		console.log("send  "+JSON.stringify(params));
+//		console.log("send  "+JSON.stringify(params));
 		$.ajax({
 			url: tool.schema + "/notice/upload",
 			type:"POST",
@@ -51,15 +80,7 @@ tool.ready(function(){
 					mui.toast("上报成功");
 					var etag = params.etag;
 //					alert(params.userType)
-					if(params.userType=="主线司机台行调"){
-						tool.open({url: "./solving.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})	
-					}else if(params.userType=="主线车站台行调"){
-						tool.open({url: "./solvingStation.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})	
-						
-					}else if(params.userType=="辅线"){
-						tool.open({url: "./solvingauxiliary.html",extras:{"etag": etag,"positions":params.positions,"trainNumber": params.trainNumber,"reason":params.reason}})	
-						
-					}
+					pageShow(params);
 
 				}else{
 					mui.toast("上报失败，请重新上报");
@@ -70,6 +91,20 @@ tool.ready(function(){
 			}
 		});
 	}
+	
+	function pageShow(params){ //选择进入对应的页面
+		
+		if(params.userType=="主线司机台行调"){
+			tool.open({url: "./solving.html",extras:{"trainNumber": params.trainNumber,"userType":params.userType,"name": user.name}})	
+		}else if(params.userType=="主线车站台行调"){
+			tool.open({url: "./solvingStation.html",extras:{"trainNumber": params.trainNumber,"userType":params.userType,"name": user.name}})	
+			
+		}else if(params.userType=="辅线"){
+			tool.open({url: "./solvingauxiliary.html",extras:{"trainNumber": params.trainNumber,"userType":params.userType,"name": user.name}})	
+			
+		}		
+	}
+	
 	
 	function positions(){
 		var bts=[{title:"岗厦下行线"},{title:"竹子林下行线"},{title:"前海湾下行线"},{title:"会展中心上行线"},{title:"岗厦上行线"}];

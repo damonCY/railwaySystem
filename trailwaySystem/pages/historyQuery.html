@@ -119,14 +119,14 @@
 				phone: phone,
 				time: time
 			}
-			console.log("-------params---"+JSON.stringify(params));
 			$.ajax({
 				type:"POST",
 				url: tool.schema+"/historyQuery",
 				data: params,
 				success: function(data){
-					console.log("-------------back"+JSON.stringify(data))
-					tool.open({"url":"../pages/historyList.html","extras": data});
+					var infoId = data.list[0].id;
+					console.log("di"+infoId)
+					tool.open({"url":"../pages/historyList.html","infoId": infoId});
 				},	
 				error: function(){}
 			});

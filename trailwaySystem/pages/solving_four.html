@@ -7,42 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/header.css"/>
-		<style>
-			.mui-content{
-				margin:0 20px;
-			}
-			.progress_content{
-				width: 100%;
-				margin-top: 50px;
-				text-align: center;
-				margin-bottom: 30px;
-			}
-			.time{
-				text-align: left;
-				display: inline-block;
-				height: 30px;
-				line-height: 40px;
-				font-size: 15px;
-				padding-left: 10px;
-			}
-			#left{
-				color: #19ab00;
-			}
-			.method{
-				padding-top: 30px;
-			}
-			.way{
-				font-size: 15px;
-				display: block;
-				margin-bottom: 20px;
-				margin-right: 30px;
-				vertical-align: middle;
-			}
-			.button{
-				border: 0px;
-				margin-right: 15px;
-			}
-		</style>
+		<link rel="stylesheet" href="../css/solvingList.css" />
 	</head>
 	<body>
 		<header class="mui-bar mui-bar-nav header">
@@ -51,7 +16,42 @@
 		</header>
 		<div class="mui-content">
 			<div class="method_container" id="method_container"></div>
-			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="form">下一步</button>
+			
+			<button type="button" class="mui-btn mui-btn-success mui-pull-right button" id="form">发送</button>
+			
+		</div>
+		<div class="realtime_container">
+			
+			<div class="item_content">
+				<ul class="mui-table-view"> 
+			        <li class="mui-table-view-cell mui-collapse">
+			            <a class="mui-navigate-right" href="#">操作记录</a>
+			            <div class="mui-collapse-content" id="solvingTemplate">
+			                <h4>暂无消息...</h4>
+			            </div>
+			        </li>
+			    </ul>
+			</div>
+			
+			<div class="item_content">
+				<div class="realTime_title">
+					<span class="mui-pull-left">实时消息</span>
+				</div>
+				<div class="send_info">
+					<input type="text" placeholder="点击输入发送的指令或消息" class="input_info"/>
+				</div>
+				<div class="send_button">
+					<button type="button" class="mui-btn mui-btn-primary send_bt" id="sendInfo">发送</button>
+				</div>
+			</div>
+			<div class="item_content">
+				<div class="realTime_title">
+					<span class="mui-pull-left">实时消息记录</span>
+				</div>
+				<div class="record_template" id="recordsTemplate">
+					<h4>暂无消息...</h4>
+				</div>
+			</div>
 		</div>
 	</body>
 <script id="one" type="text/html">
@@ -69,20 +69,22 @@
 		</div>
 	</div>
 </script>
+
 <script src="../js/mui.min.js"></script>
 <script src="../js/jquery.min.js"></script>
+<script src="../js/template.js"></script>
 <script src="../js/tool.js"></script>
 <script>
 	tool.plusReady(function(){
-	   var page  = tool.openInfo();
-//		console.log(JSON.stringify(page))
+		var page  = tool.openInfo();	
 		var extras = {
-			etag: page.etag,
-			positions: page.positions,
 			trainNumber: page.trainNumber,
-			reason: page.reason,
-			solving_list: page.solving_list
+			userType: page.userType,
+			name: page.name,
+			methods: "",
+			detail: "detail"
 		}
+//		console.log("extras---"+JSON.stringify(extras))
 		var methods = [
 			 {
 				maxTime: 300, 
@@ -93,10 +95,13 @@
 		var clear;
 		var obj = {
 			ways:[],
-			overTime: false
+			overTime: false,
+			name: page.name,
+			userType: page.userType,
+			startTime: tool.getTime('',"hh:mm:s")
 		}
-		var html = template('one',methods[0]);
-		document.getElementById('method_container').innerHTML = (html);
+		var one = template('one',methods[0]);
+		document.getElementById('method_container').innerHTML = (one);
 		$('#form').on('click',function(){
 			check();
 		})
@@ -117,6 +122,7 @@
 			},1000)
 		}
 		function check(){
+
 			$('input').each(function(){
 				if($(this).is(":checked")){
 					console.log($(this).attr('value'));
@@ -128,10 +134,38 @@
 				mui.toast("请选择一项");
 				return 
 			}
-			extras.solving_list.push(obj);
-			tool.open({url: "./solving_five.html",extras:extras}); 
+			extras.methods = JSON.stringify(obj);
+			console.log("auxiliary---"+JSON.stringify(extras));
+			$.ajax({
+				url: tool.schema + "/notice/upload",
+				type:"POST",
+				dataType: "JSON",
+				data: extras,
+				success: function(data){
+					console.log("auxi---back--"+JSON.stringify(data));
+					if(data.status==1){
+						tool.open({url: "./solving_five.html",extras: extras});
+					}
+				},
+			})
 		}
 	})
 </script>
-<script src="../js/template.js"></script>
+
+<script id="records" type="text/html">
+	{{each recordsList as item}}
+		<p>{{item.Time}} [{{item.name}}] {{item.userType}} {{item.info}}</p>
+	{{/each}}
+</script>
+<script id="solvingList" type="text/html">
+	{{each solvingList as item}}
+		<p>
+			{{item.startTime}} [{{item.name}}] {{item.userType}} 
+			{{each item.ways as value}}
+				{{value}}
+			{{/each}}
+		</p>
+	{{/each}}
+</script>
+<script src="../js/solvingInfo.js"></script>
 </html>

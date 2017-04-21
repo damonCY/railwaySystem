@@ -83,9 +83,9 @@
 		<tbody>
 			{{if list.length>0}}
 			{{each list as item}}
-			<tr class="item_content" data-etag={{item.etag}}>
+			<tr class="item_content" data-id={{item.id}}>
 				<td width="20%">{{item.name}}</td>
-				<td width="20%">{{item.solvingList[0].ways[0]}}</td>
+				<td width="20%">{{item.reason}}</td>
 				<td width="30%">{{item.userType}}</td>
 				<td width="30%">{{item.time}}</td> 
 			</tr>
@@ -102,33 +102,26 @@
 <script src="../js/template.js"></script>
 <script>
 	tool.plusReady(function(){
-		var parentData = tool.openInfo();
-		if(parentData.list){
-			console.log("historyList---"+JSON.stringify(parentData.list));
-			var getTime = tool.getTime;
-				if(parentData.status=="success"){
-					parentData.list.forEach(function(value,index){
-						value.time = getTime(value.time);
-					})
-				var html = template('template',parentData);
-				document.getElementById('list').innerHTML = html;
-				} 
+		var page = tool.openInfo();
+		if(page.infoId!=""){
+			init(page.infoId);
 		}else{
 			init();
 		}
 
-		function init(){
+		function init(params){
 			$.ajax({
 				url: tool.schema+"/historyList",
-				type: "get",
+				type: "POST",
+				data: {
+					id: params || ""
+				},
 				success: function(data){
+//					var data = data.list[0];
 
 					var getTime = tool.getTime;
-					if(data.status=="success"){
-						data.list.forEach(function(value,index){
-							var seconds = value.time;
-							value.time = getTime(seconds);
-						})
+					if(data.status=="1"){
+						console.log(JSON.stringify(data))
 					var html = template('template',data);
 					document.getElementById('list').innerHTML = html;
 					} 
@@ -140,8 +133,8 @@
 		}
 		
 		$('.list').on('tap','tr',function(){
-			var data = $(this).attr("data-etag");
-			tool.open({url: "./detail.html",extras: {etag: data}}); 
+			var data = $(this).attr("data-id");
+			tool.open({url: "./detail.html",extras: {infoId: data}}); 
 		})
 	})
 </script>

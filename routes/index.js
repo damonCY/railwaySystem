@@ -92,19 +92,18 @@ module.exports = function(app){
 
 	//上传故障
 	app.post('/notice/upload',function(req,res){
-		console.log("saving")
 		var obj = {};
-		var id = req.body.id;
-		var etag = req.body.etag;
-		console.log('getTag '+etag);
+		var type = req.body.type;
+		var trainNumber = req.body.trainNumber;
+		var detail = req.body.detail ||"";
+		console.log("11"+JSON.stringify(req.body));
 		for(var key in req.body){
 			obj[key] = req.body[key];
 		}
-		mTool.find(schemas.noticeList,{"id": id},function(err,data){//查询存在
+		mTool.find(schemas.noticeList,{"trainNumber": trainNumber},function(err,data){//查询存在
 			var data = data[0] || {};
-			console.log('查询是否存在etag '+ JSON.stringify(data))
 			console.log('typeof ---'+  mTool.isEmptyObject(data));
-			 if(mTool.isEmptyObject(data)||("etag" in data)&&etag !=data['etag']){
+			 if(mTool.isEmptyObject(data)){
 				mTool.insert(schemas.noticeList,obj, //不存在就添加
 					function(err,data){
 					if(err){
@@ -114,14 +113,20 @@ module.exports = function(app){
 					}
 				});
 			}else{
-				console.log("db obj "+JSON.stringify(obj))
-				mTool.update(schemas.noticeList,{"id": id},{$set: obj},function(err,data){ //存在就更新
+				if(detail===""){
+					res.send({"status": 1,"data": []});
+					return
+				}
+				console.log(JSON.stringify(obj["methods"]))
+				schemas.noticeList.update({"trainNumber": trainNumber},{
+					$push: {"solvingList": obj["methods"]}
+				},function(err,data){
 					if(err){
-						res.send("error: "+err)
+						res.send(err)
 					}else{
-						res.send({"status": "1","data": data});
+						res.send({"status": 1,"data": data})
 					}
-				});
+				})
 			}
 			
 		})
@@ -171,21 +176,27 @@ module.exports = function(app){
 	})
 
 	//历史记录
-	app.get("/historyList",function(req,res){
+	app.post("/historyList",function(req,res){
+		var body = req.body;
+		var query = {};
+		if(body.id){
+			query.id = body.id;
+			console.log("get---"+body.id)
+		}
 
-		mTool.find(schemas.solvingList,{},function(err,data){
+		mTool.find(schemas.noticeList,query,function(err,data){
 			if(err){
 				console.log("/noticeList error"+ err)
 			}else{
-				res.send({list: data,status: "success"});
+				res.send({list: data,status: "1"});
 			}
 		})
 	})
 
 	//历史记录详情查看
 	app.post("/historyList",function(req,res){
-		var etag = req.body.etag;
-		mTool.find(schemas.solvingList,{"etag": etag},function(err,data){
+		var id = req.body.id;
+		mTool.find(schemas.noticeList,{"id": id},function(err,data){
 			if(err){
 				console.log("/noticeList error"+ err)
 			}else{
@@ -213,12 +224,75 @@ module.exports = function(app){
 				query.phone = body.phone;
 			}
 			console.log("/historyQuery----"+JSON.stringify(query))
-			mTool.find(schemas.solvingList,query,function(err,data){
+			mTool.find(schemas.noticeList,{},function(err,data){
 				if(err){
 					console.log("/historyQuery error"+err)
 				}else{
-					res.send({list: data,status: "success"})
+					res.send({list: data,status: "1"})
 				}
 			})
+	})
+
+	//删除数据
+	app.post('/delet',function(req,res){
+		var body = req.body;
+		var type = body.type;
+		mTool.delet(schemas[type],{},function(err,data) {
+			if(err){
+				console.log("/noticeList error"+ err)
+			}else{
+				res.send({list: data,status: 1});
+			}
+		})
+	})
+
+	//实时消息
+	app.post('/sendInfo',function(req,res){
+		var body = req.body;
+		var obj = {};
+			obj.trainNumber = body.trainNumber;
+			obj.recordsList = body.sendInfo;
+			console.log(JSON.stringify(body))
+
+		mTool.find(schemas.recordsList,{"trainNumber": obj.trainNumber},function(err,data){//查询存在
+			var data = data[0] || {};
+			 if(mTool.isEmptyObject(data)){
+				mTool.insert(schemas.recordsList,obj, //不存在就添加
+					function(err,data){
+					if(err){
+						res.send(err)
+					}else{
+						res.send({"status": 1,"data": data});
+					}
+				});
+			}else{
+
+				schemas.recordsList.update({"trainNumber": obj.trainNumber},{
+					$push: {"recordsList": obj.recordsList}
+				},function(err,data){
+					if(err){
+						res.send(err)
+					}else{
+						res.send({"status": 1,"data": data})
+					}
+				})
+			}
+			
+		})
+
+	})
+
+	//查看即时消息
+
+	app.post('/showRecords',function(req,res){
+		var body = req.body;
+		console.log("/showRecords--"+JSON.stringify(body))
+		mTool.find(schemas.recordsList,{trainNumber: body.trainNumber},function(err,data){
+			if(err){
+				console.log("/recordsList error"+err)
+			}else{
+				res.send({list: data,status: "success"})
+			}
+		})
 	})
 }

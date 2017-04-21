@@ -36,6 +36,7 @@ var mongoose = require('./db.js'),
 		positions: {type: String},
 		trainNumber: {type: String},
 		reason: {type: String},
+		solvingList: {type: Array},
 	});
 
 	var solvingListSchema = new Schema({
@@ -51,6 +52,11 @@ var mongoose = require('./db.js'),
 		solvingList:{type: Array},
 	})
 
+	var recordsListSchema = new Schema({  //记录实时消息
+		trainNumber: {type: String},
+		recordsList:{type: Array}
+
+	})
 
 module.exports = {
 		user: mongoose.model('User',UserSchema),
@@ -58,4 +64,5 @@ module.exports = {
 		personal: mongoose.model('personal',personalSchema),
 		noticeList: mongoose.model('noticeList',noticeListSchema),
 		solvingList: mongoose.model('solvingList',solvingListSchema),
+		recordsList: mongoose.model("recordsList",recordsListSchema),
 }

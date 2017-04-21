@@ -61,8 +61,8 @@
 			targetPage.close();
 		}
 	},
-//	schema: "http://192.168.191.1:4000",//windows192.168.191.2
-	schema: "http://125.81.58.250:5000",//mac
+	schema: "http://192.168.191.3:5000",//windows192.168.191.2
+//	schema: "http://125.81.58.217:5000",//mac
 	reload: function(id){
 		if(id){
 			var parent = plus.webview.getWebviewById(id);
@@ -79,8 +79,10 @@
 			callback&&callback();
 		})
 	},
-	getTime: function(seconds){
-		var seconds = parseInt(seconds);
+	getTime: function(seconds,hour){
+		if(seconds){
+			var seconds = parseInt(seconds);
+		}
 		if(seconds){
 			var time = new Date(seconds);
 		}else{
@@ -91,8 +93,11 @@
 		var dd = time.getDate();
 		var HH = time.getHours();
 		var mm = time.getMinutes();
-		if(seconds){
+		var s = time.getSeconds();
+		if(seconds!=""){
 			return MM + "-" + dd + " " + HH + ":"+ mm;
+		}else if(hour==="hh:mm:s"){
+			return HH + ":"+ mm + ":"+s;
 		}else{
 			return YY + "-" + MM + "-" + dd + " " + HH + ":"+ mm;	
 		}

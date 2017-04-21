@@ -4,12 +4,6 @@ tool.ready(function(){
 	});
 	var params = {};
 	init(); //初始化显示
-	tool.plusReady(function(){
-		var pages = plus.webview.all();
-		pages.forEach(function(value,index){
-			console.log(JSON.stringify(value))
-		})
-	})
 	$('.submit').on('tap',function(){
 //		mui.prompt('你确定退出登录吗？',['true','false'],null,'div');
 		mui.confirm("",'你确定退出应用吗?',['确定','再看看'],function(data){
@@ -56,7 +50,6 @@ tool.ready(function(){
 	})
 function init(){
 	var user = tool.getItem('user');
-	console.log("this  "+JSON.stringify(user));
 	$('#name').text(user["name"]);
 	$("#gender").text(user["gender"]);
 	$("#birthday").text(user["birthday"]);
@@ -79,7 +72,7 @@ function showActionSheet(){
 			
 			console.log("thisgender11 "+gender);
 			$("#gender").text(gender);
-			tool.setItem('user',{"gender": gender});
+			tool.setItem('user',{"gender": gender}); 
 //			params["gender"] = gender;
 		}
 	)

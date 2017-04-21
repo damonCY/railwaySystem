@@ -26,9 +26,8 @@ var mTool = {
 		console.log("tool-----find ");
 		var sche = schema || {};
 		obj.find(sche,function(err,resdata){
-
 			callback&&callback(err,resdata);
-		}).sort({'_id':-1});
+		}).sort({_id: -1});
 	},
 	delet: function(obj,schema,callback){
 		console.log("tool-----delet ");
