@@ -61,7 +61,7 @@
 			targetPage.close();
 		}
 	},
-	schema: "http://192.168.191.3:5000",//windows192.168.191.2
+	schema: "http://192.168.191.2:4000",//windows192.168.191.2
 //	schema: "http://125.81.58.217:5000",//mac
 	reload: function(id){
 		if(id){

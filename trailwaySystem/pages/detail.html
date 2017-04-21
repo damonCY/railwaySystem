@@ -38,6 +38,7 @@
 		<header class="mui-bar mui-bar-nav header">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">处置操作记录详情</h1>
+			<button type="button" class="mui-btn mui-pull-right mui-btn-success" id="refresh">刷新</button>
 		</header>
 		
 		<div class="mui-content" id="content">
@@ -82,7 +83,11 @@
 <script src="../js/tool.js"></script>
 <script>
 	tool.plusReady(function(){
-		var page  = tool.openInfo();	
+		var page  = tool.openInfo();
+		$('#refresh').on('tap',function(){
+			mui.toast("refresh....");
+			init();
+		})
 		init();
 		function init(){
 			$.ajax({
